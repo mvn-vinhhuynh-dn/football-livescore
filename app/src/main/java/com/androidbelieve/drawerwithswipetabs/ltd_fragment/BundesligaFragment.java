@@ -5,6 +5,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import com.androidbelieve.drawerwithswipetabs.R;
 import com.androidbelieve.drawerwithswipetabs.acitivities.MatchDetailActivity_;
@@ -38,6 +39,9 @@ public class BundesligaFragment extends Fragment implements ItemStickyClick {
     @ViewById(R.id.dialog_bundes)
     MaterialProgressBar mDialog;
 
+    @ViewById(R.id.ltd_bundes_empty)
+    LinearLayout mEmptyLayout;
+
     private BundesligaAdapter mAdapter;
     private ArrayList<LTD> mDatas = new ArrayList<>();
     private StickyHeadersItemDecoration top;
@@ -68,6 +72,8 @@ public class BundesligaFragment extends Fragment implements ItemStickyClick {
     private void initView() {
         mRecycleView.setLayoutManager(new LinearLayoutManager(getActivity()
                 .getBaseContext()));
+        mEmptyLayout.setVisibility(View.VISIBLE);
+        mRecycleView.setVisibility(View.GONE);
     }
 
     private void getLTD() {
@@ -77,6 +83,8 @@ public class BundesligaFragment extends Fragment implements ItemStickyClick {
             public void success(LTD ltd) {
                 mDatas.add(ltd);
                 mDialog.setVisibility(View.GONE);
+                mEmptyLayout.setVisibility(View.GONE);
+                mRecycleView.setVisibility(View.VISIBLE);
                 mRecycleView.setAdapter(mAdapter);
                 mRecycleView.addItemDecoration(overlay);
                 mRecycleView.addItemDecoration(top);
