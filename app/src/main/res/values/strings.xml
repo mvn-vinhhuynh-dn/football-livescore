@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">FootBallLiveScore</string>
+    <string name="main_url">http://livescore.bongdaplus.vn</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="base_url">http://api.football-data.org</string>
+    <string name="detail_match">Chi tiết trận đấu</string>
+</resources>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_40"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/margin_5"
+        android:paddingTop="@dimen/margin_5"
+        android:weightSum="5">
+
+        <TextView
+            android:id="@+id/tv_date_fc_schedule"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="08-11-2015"
+            android:textSize="@dimen/text_size_12" />
+
+        <TextView
+            android:id="@+id/tv_league_fc_schedule"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Ngoại hạng anh"
+            android:textColor="#056f00"
+            android:textSize="@dimen/text_size_12" />
+
+        <TextView
+            android:id="@+id/tv_home_name_fc_schedule"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.2"
+            android:gravity="center"
+            android:text="Stock City"
+            android:textSize="@dimen/text_size_12" />
+
+        <TextView
+            android:id="@+id/tv_result_fc_schedule"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.6"
+            android:background="@color/gray"
+            android:gravity="center"
+            android:text="00:30"
+            android:textColor="#f36c60"
+            android:textSize="@dimen/text_size_12"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_away_name_fc_schedule"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.2"
+            android:gravity="center"
+            android:text="Chelsea"
+            android:textSize="@dimen/text_size_12" />
+    </LinearLayout>
+</LinearLayout>

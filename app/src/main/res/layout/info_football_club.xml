@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbarInfo"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_56dp"
+        android:background="@color/orange"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <LinearLayout
+        android:id="@+id/lnCenter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbarInfo"
+        android:background="@color/gray_light"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/margin_10"
+        android:paddingLeft="@dimen/margin_10"
+        android:paddingRight="@dimen/margin_5">
+
+        <TextView
+            android:id="@+id/tvFCName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_5"
+            android:drawableRight="@drawable/ic_navigate_next_18dp"
+            android:textColor="#e84e40"
+            android:textSize="@dimen/text_size_20sp"
+            android:textStyle="bold"
+            android:visibility="invisible" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_1dp"
+            android:layout_marginTop="@dimen/margin_5"
+            android:background="#616161" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/bg_img_radius"
+                android:padding="@dimen/margin_10">
+
+                <ImageView
+                    android:id="@+id/imgLogoFC"
+                    android:layout_width="@dimen/height_80dp"
+                    android:layout_height="@dimen/height_80dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_10"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_35dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.9"
+                        android:gravity="center_vertical"
+                        android:text="Năm thành lập:"
+                        android:textSize="@dimen/text_size_14"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvYear"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.1"
+                        android:gravity="center_vertical"
+                        android:textSize="@dimen/text_size_13sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_30dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.9"
+                        android:gravity="center_vertical"
+                        android:text="Địa chỉ:"
+                        android:textSize="@dimen/text_size_14"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvAddress"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.1"
+                        android:gravity="center_vertical"
+                        android:textSize="@dimen/text_size_13sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_30dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.9"
+                        android:gravity="center_vertical"
+                        android:text="Quốc gia:"
+                        android:textSize="@dimen/text_size_14"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvCountry"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.1"
+                        android:gravity="center_vertical"
+                        android:textSize="@dimen/text_size_13sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_35dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.9"
+                        android:gravity="center_vertical"
+                        android:text="Số điện thoại:"
+                        android:textSize="@dimen/text_size_14"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvPhoneNum"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.1"
+                        android:gravity="center_vertical"
+                        android:textSize="@dimen/text_size_13sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_35dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.9"
+                        android:gravity="center_vertical"
+                        android:text="Sân vận động:"
+                        android:textSize="@dimen/text_size_14"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvStadium"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.1"
+                        android:gravity="center_vertical"
+                        android:text=""
+                        android:textSize="@dimen/text_size_13sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/views"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_1dp"
+        android:layout_below="@+id/lnCenter"
+        android:layout_marginLeft="@dimen/margin_10"
+        android:layout_marginRight="@dimen/margin_10"
+        android:background="#616161" />
+
+    <LinearLayout
+        android:id="@+id/lnTop"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_40"
+        android:layout_below="@+id/views"
+        android:background="@color/gray_light"
+        android:orientation="horizontal"
+        android:weightSum="6">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2.7"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/height_30"
+            android:text="Cầu thủ"
+            android:textSize="@dimen/text_size_14"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.8"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/margin_10"
+            android:text="Quốc tịch"
+            android:textSize="@dimen/text_size_14"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/margin_5"
+            android:text="Vị trí"
+            android:textSize="@dimen/text_size_14"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycle_view_fc_infor"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/lnTop"
+        android:background="@color/white"
+        android:padding="@dimen/margin_10"
+        android:scrollbars="none" />
+
+    <me.zhanghai.android.materialprogressbar.MaterialProgressBar
+        android:id="@+id/progress_dialog_fc_info"
+        style="@style/Widget.MaterialProgressBar.ProgressBar.Large"
+        android:layout_width="@dimen/height_30"
+        android:layout_height="@dimen/height_30"
+        android:layout_centerInParent="true"
+        android:indeterminate="true"
+        android:visibility="gone" />
+</RelativeLayout>

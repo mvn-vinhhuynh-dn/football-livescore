@@ -1,0 +1,63 @@
+<com.andexert.library.RippleView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:ripple="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    ripple:rv_type="rectangle">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_56dp"
+            android:background="@color/orange"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:title="@string/app_name">
+
+        </android.support.v7.widget.Toolbar>
+
+        <android.support.v4.widget.DrawerLayout
+            android:id="@+id/drawerLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/root"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <FrameLayout
+                    android:id="@+id/containerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical" />
+
+                <ImageView
+                    android:id="@+id/imgMove"
+                    android:layout_width="@dimen/height_45"
+                    android:layout_height="@dimen/height_45"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginBottom="@dimen/margin_10"
+                    android:layout_marginRight="@dimen/margin_10"
+                    android:src="@drawable/ball" />
+
+            </RelativeLayout>
+
+            <android.support.design.widget.NavigationView
+                android:id="@+id/shitstuff"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
+                android:layout_marginTop="-24dp"
+                app:itemTextColor="@color/black"
+                app:menu="@menu/drawermenu" />
+
+        </android.support.v4.widget.DrawerLayout>
+    </LinearLayout>
+</com.andexert.library.RippleView>

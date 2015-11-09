@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_140dp"
+        android:layout_marginTop="@dimen/margin_10"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/margin_10"
+        android:paddingLeft="@dimen/margin_10"
+        android:paddingRight="@dimen/margin_10"
+        android:weightSum="3">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.75"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/home_icon_detail_header"
+                android:layout_width="@dimen/height_50"
+                android:layout_height="@dimen/height_50"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/margin_5"
+                android:src="@drawable/ic_chelsea" />
+
+            <TextView
+                android:id="@+id/home_name_details_header"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_50dp"
+                android:layout_marginTop="@dimen/margin_2dp"
+                android:gravity="center|top"
+                android:textSize="@dimen/text_size_14" />
+
+            <TextView
+                android:id="@+id/tvHomeWin"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+              />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:weightSum="5">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="@dimen/height_15dp"
+                android:layout_marginTop="@dimen/height_15dp"
+                android:layout_weight="1"
+                android:background="#dd191d"
+                android:gravity="center"
+                android:text="C"
+                android:textColor="#fff"
+                android:textSize="@dimen/text_size_12" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_goals"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_100dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:gravity="center"
+                    android:text="Chưa đá \nvs"
+                    android:textSize="@dimen/text_size_14" />
+
+                <TextView
+                    android:id="@+id/tvDraws"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_20dp"
+                    android:gravity="center"
+                    />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="@dimen/height_15dp"
+                android:layout_marginTop="@dimen/height_15dp"
+                android:layout_weight="1"
+                android:background="#039be5"
+                android:gravity="center"
+                android:text="K"
+                android:textColor="#fff"
+                android:textSize="@dimen/text_size_12" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.75"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/against_icon_detail_header"
+                android:layout_width="@dimen/height_50"
+                android:layout_height="@dimen/height_50"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/margin_5"
+                android:src="@drawable/ic_manchester_united" />
+
+            <TextView
+                android:id="@+id/against_name_details_header"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_50dp"
+                android:layout_marginTop="@dimen/margin_2dp"
+                android:gravity="top|center"
+                android:textSize="@dimen/text_size_14" />
+
+            <TextView
+                android:id="@+id/tvAgainsWin"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+              />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

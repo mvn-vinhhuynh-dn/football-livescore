@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="dark">#616161</color>
+    <color name="default_header_color">#445566</color>
+    <color name="gray">#E0E0E0</color>
+    <color name="transparen">#00ffffff</color>
+    <color name="gray_light">#eeeeee</color>
+</resources>

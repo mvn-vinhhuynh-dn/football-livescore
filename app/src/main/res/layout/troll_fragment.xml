@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycleTroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/lnParent"
+        android:scrollbars="vertical" />
+
+    <me.zhanghai.android.materialprogressbar.MaterialProgressBar
+        android:id="@+id/progress_dialog_troll"
+        style="@style/Widget.MaterialProgressBar.ProgressBar.Large"
+        android:layout_width="20dp" android:layout_centerInParent="true"
+        android:layout_height="20dp"
+        android:indeterminate="true" />
+</RelativeLayout>

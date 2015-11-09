@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Lịch Thi Đấu"
+          android:id="@+id/nav_item_ltd"
+          android:icon="@drawable/ic_ltd" />
+
+    <item android:title="Bảng Xếp Hạng"
+          android:id="@+id/nav_item_bxh"
+          android:icon="@drawable/ic_bxh"/>
+
+    <item
+        android:title="Champion League/C1"
+        android:id="@+id/nav_item_c1"
+        android:icon="@drawable/ic_c1"/>
+
+    <item android:title="Others">
+        <menu>
+            <item android:title="Tin Tức Bóng Đá"
+                android:id="@+id/nav_item_news"
+                android:icon="@drawable/ic_news"/>
+
+            <item
+                android:title="Troll Bóng Đá"
+                android:icon="@drawable/ic_troll"
+                android:id="@+id/nav_item_troll"/>
+        </menu>
+    </item>
+
+    <group android:id="@+id/group_settings_id">
+
+        <item android:title="Settings"
+              android:icon="@drawable/settings"/>
+        <item android:title="Help"
+             android:icon="@drawable/help"/>
+    </group>
+
+</menu>

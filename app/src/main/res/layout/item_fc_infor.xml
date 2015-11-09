@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout android:id="@+id/lnParent_teamInfo"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_50"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:weightSum="6">
+
+        <ImageView
+            android:id="@+id/imgAva_item"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/height_30"
+            android:layout_weight="0.6"
+            android:src="@drawable/join_tery" />
+
+        <TextView
+            android:id="@+id/tvName_item"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2.1"
+            android:gravity="center_vertical"
+            android:text="Join Tery" />
+
+        <TextView
+            android:id="@+id/countr_item"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.6"
+            android:gravity="center"
+            android:text="Anh" />
+
+        <TextView
+            android:id="@+id/pos_item"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.7"
+            android:gravity="center"
+            android:text="Thủ môn" />
+    </LinearLayout>
+</LinearLayout>
