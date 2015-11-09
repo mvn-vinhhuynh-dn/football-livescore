@@ -5,6 +5,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import com.androidbelieve.drawerwithswipetabs.R;
 import com.androidbelieve.drawerwithswipetabs.acitivities.MatchDetailActivity_;
@@ -44,6 +45,9 @@ public class SeriaFragment extends Fragment implements ItemStickyClick {
     @ViewById(R.id.dialog_seria)
     MaterialProgressBar mMaterialProgressBar;
 
+    @ViewById(R.id.ltd_seria_empty)
+    LinearLayout mEmptyLayout;
+
     @AfterViews
     void afterViews() {
         initView();
@@ -58,6 +62,8 @@ public class SeriaFragment extends Fragment implements ItemStickyClick {
             public void success(LTD ltd) {
                 mDatas.add(ltd);
                 mMaterialProgressBar.setVisibility(View.GONE);
+                mEmptyLayout.setVisibility(View.GONE);
+                mRecycleView.setVisibility(View.VISIBLE);
                 mRecycleView.setAdapter(personAdapter);
                 mRecycleView.addItemDecoration(overlay);
                 mRecycleView.addItemDecoration(top);
@@ -108,6 +114,8 @@ public class SeriaFragment extends Fragment implements ItemStickyClick {
     private void initView() {
         mRecycleView.setLayoutManager(new LinearLayoutManager(getActivity()
                 .getBaseContext()));
+        mEmptyLayout.setVisibility(View.VISIBLE);
+        mRecycleView.setVisibility(View.GONE);
     }
 
     @Override
