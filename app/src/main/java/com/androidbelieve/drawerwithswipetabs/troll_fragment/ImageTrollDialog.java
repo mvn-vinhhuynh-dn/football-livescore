@@ -30,7 +30,6 @@ public class ImageTrollDialog extends DialogFragment {
 
     @AfterViews
     void afterView(){
-       // getDialog().setTitle(mtroll.getContent());
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
         getDialog().getWindow().setBackgroundDrawableResource(android.R.color.transparent);
 
