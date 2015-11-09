@@ -31,6 +31,7 @@ public class App extends Application {
                 .sessionStore(new MySession())
                 .build();
         ApiClient.getInstance().init(apiConfig);
+        //Test
     }
 
     @Override
