@@ -7,8 +7,6 @@ import android.view.View;
 
 import com.androidbelieve.drawerwithswipetabs.R;
 import com.androidbelieve.drawerwithswipetabs.abstracts.BaseFragment;
-import com.androidbelieve.drawerwithswipetabs.footballplayerinfor.PlayerInformationDialog;
-import com.androidbelieve.drawerwithswipetabs.footballplayerinfor.PlayerInformationDialog_;
 import com.androidbelieve.drawerwithswipetabs.models.Troll;
 import com.androidbelieve.drawerwithswipetabs.util.DividerItemDecoration;
 import com.androidbelieve.drawerwithswipetabs.util.RecyclerItemClickListener;
@@ -68,11 +66,18 @@ public class TrollFragment extends BaseFragment {
         mRecycleTroll.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), mRecycleTroll, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Log.d("=====", mArraylist.get(position).getImg());
-                ImageTrollDialog mDialog = ImageTrollDialog_.builder()
-                        .mtroll(mArraylist.get(position))
-                        .build();
-                mDialog.show(getChildFragmentManager(), "aaaa");
+                if (checkVideoYoutube(mArraylist.get(position).getImg())){
+
+                    VideoTrollDialog_.builder()
+                            .url("https://www.youtube.com/watch?v="+mArraylist.get(position).getImg().substring(26, 37))
+                            .build().show(getChildFragmentManager(),"videotroll");
+
+                } else {
+                    ImageTrollDialog mDialog = ImageTrollDialog_.builder()
+                            .mtroll(mArraylist.get(position))
+                            .build();
+                    mDialog.show(getChildFragmentManager(), "ImageTroll");
+                }
             }
 
             @Override
@@ -93,11 +98,11 @@ public class TrollFragment extends BaseFragment {
                 totalItemCount = linearLayoutManager.getItemCount();
                 pastVisiblesItems = linearLayoutManager.findFirstVisibleItemPosition();
 
-                if ( loading ) {
+                if (loading) {
                     if ((visibleItemCount + pastVisiblesItems) == totalItemCount) {
                         loading = false;
                         int a = mArraylist.size();
-                        loadData("http://trollbongda.com/?start="+a);
+                        loadData("http://trollbongda.com/?start=" + a);
                     }
                 }
             }
@@ -118,6 +123,13 @@ public class TrollFragment extends BaseFragment {
             loading =true;
             getdata(document);
         }
+    }
+
+    private boolean checkVideoYoutube(String url){
+        if (url.startsWith("http://img.youtube.com")) {
+            return true;
+        }
+        return false;
     }
 
     private boolean isAdd(String url) {
