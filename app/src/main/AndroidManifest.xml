@@ -32,5 +32,8 @@
         <activity
             android:name=".ltdfootballclub.ScheduleFcActivity_"
             android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name=".troll_fragment.VideoTrollDialog"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
     </application>
 </manifest>
