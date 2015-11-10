@@ -32,7 +32,6 @@ public class ImageTrollDialog extends DialogFragment {
     void afterView(){
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
         getDialog().getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-
         Picasso.with(getActivity()).load(mtroll.getImg()).into(mImageView);
         PhotoViewAttacher mPhotoview = new PhotoViewAttacher(mImageView);
 

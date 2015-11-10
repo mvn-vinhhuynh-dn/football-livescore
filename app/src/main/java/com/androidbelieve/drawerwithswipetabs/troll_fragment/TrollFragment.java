@@ -1,5 +1,6 @@
 package com.androidbelieve.drawerwithswipetabs.troll_fragment;
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -68,9 +69,13 @@ public class TrollFragment extends BaseFragment {
             public void onItemClick(View view, int position) {
                 if (checkVideoYoutube(mArraylist.get(position).getImg())){
 
-                    VideoTrollDialog_.builder()
-                            .url("https://www.youtube.com/watch?v="+mArraylist.get(position).getImg().substring(26, 37))
-                            .build().show(getChildFragmentManager(),"videotroll");
+//                    VideoTrollDialog_.builder()
+//                            .url("https://www.youtube.com/watch?v="+mArraylist.get(position).getImg().substring(26, 37))
+//                            .build().show(getChildFragmentManager(),"videotroll");
+
+                    Intent in = new Intent(getActivity(),VideoTrollDialog.class);
+                    in.putExtra("url",mArraylist.get(position).getImg().substring(26, 37));
+                            getActivity().startActivity(in);
 
                 } else {
                     ImageTrollDialog mDialog = ImageTrollDialog_.builder()
