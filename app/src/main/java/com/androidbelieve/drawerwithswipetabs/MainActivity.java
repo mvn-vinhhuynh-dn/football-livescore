@@ -1,8 +1,10 @@
 package com.androidbelieve.drawerwithswipetabs;
 
+import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.Build;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -11,10 +13,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.androidbelieve.drawerwithswipetabs.ChampionLeague.C1TabFragment;
 import com.androidbelieve.drawerwithswipetabs.ChampionLeague.C1TabFragment_;
@@ -23,6 +27,8 @@ import com.androidbelieve.drawerwithswipetabs.bxh_fragment.BXHTabFragment;
 import com.androidbelieve.drawerwithswipetabs.bxh_fragment.BXHTabFragment_;
 import com.androidbelieve.drawerwithswipetabs.ltd_fragment.LTDTabFragment;
 import com.androidbelieve.drawerwithswipetabs.ltd_fragment.LTDTabFragment_;
+import com.androidbelieve.drawerwithswipetabs.ltd_today_fragment.Ltd_today_fragment;
+import com.androidbelieve.drawerwithswipetabs.ltd_today_fragment.Ltd_today_fragment_;
 import com.androidbelieve.drawerwithswipetabs.news_fragment.NewsTabsFragment;
 import com.androidbelieve.drawerwithswipetabs.news_fragment.NewsTabsFragment_;
 import com.androidbelieve.drawerwithswipetabs.troll_fragment.TrollFragment;
@@ -33,14 +39,23 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 @EActivity(R.layout.activity_main)
 public class MainActivity extends AppCompatActivity implements BaseFragment.OnBaseFragmentListener, View.OnTouchListener {
     @ViewById(R.id.drawerLayout)
     DrawerLayout mDrawerLayout;
+
     @ViewById(R.id.shitstuff)
     NavigationView mNavigationView;
+
     @ViewById(R.id.toolbar)
     Toolbar mToolBar;
+
+    @ViewById(R.id.lldrawer)
+    LinearLayout mLldrawer;
+
     private Fragment mContent;
     @ViewById(R.id.imgMove)
     ImageView mImgBall;
@@ -48,9 +63,15 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnBa
     private float mDx;
     private boolean isMoveImgBall = false;
     private CheckConnection mCheckConnection;
+    private String mToDate;
 
     @AfterViews
     void afterViews() {
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+        mToDate = df.format(c.getTime());
+
+
         mCheckConnection = new CheckConnection(this);
         if (mCheckConnection.hasConnection()){
         intViews();
@@ -62,12 +83,26 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnBa
         } else {
             showAlertDialog(this,"No Conection");
         }
+        setDrawerLayoutMargin();
+    }
+
+    private void setDrawerLayoutMargin() {
+        LinearLayout.LayoutParams layoutParams =  new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT);
+        if (android.os.Build.VERSION.SDK_INT < 21) {
+            layoutParams.setMargins(0, 0, 0, 0);
+        }else {
+            layoutParams.setMargins(0, -100, 0, 0);
+        }
+        mNavigationView.setLayoutParams(layoutParams);
+
     }
 
     private void intViews() {
-        LTDTabFragment tabFragment = new LTDTabFragment_();
-        changeFragment(tabFragment, true);
-        mToolBar.setTitle("Lịch Thi Đấu");
+        Ltd_today_fragment ltd_today_fragment = new Ltd_today_fragment_();
+        changeFragment(ltd_today_fragment, true);
+        mToolBar.setTitle("Lịch Thi Đấu Hôm Nay");
         mImgBall.setOnTouchListener(this);
     }
 
@@ -76,6 +111,12 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnBa
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 mDrawerLayout.closeDrawers();
+                if (menuItem.getItemId() == R.id.nav_item_ltdToday) {
+                    Ltd_today_fragment ltd_today_fragment = new Ltd_today_fragment_();
+                    changeFragment(ltd_today_fragment, true);
+                    mToolBar.setTitle("Lịch Thi Đấu Hôm Nay");
+                }
+
                 if (menuItem.getItemId() == R.id.nav_item_ltd) {
                     LTDTabFragment tabFragment = new LTDTabFragment_();
                     changeFragment(tabFragment, true);

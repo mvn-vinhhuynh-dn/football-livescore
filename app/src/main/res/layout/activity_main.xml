@@ -49,14 +49,19 @@
 
             </RelativeLayout>
 
-            <android.support.design.widget.NavigationView
-                android:id="@+id/shitstuff"
+            <LinearLayout
+                android:id="@+id/lldrawer"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_gravity="start"
-                android:layout_marginTop="-24dp"
-                app:itemTextColor="@color/black"
-                app:menu="@menu/drawermenu" />
+                android:layout_gravity="start">
+
+                <android.support.design.widget.NavigationView
+                    android:id="@+id/shitstuff"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    app:itemTextColor="@color/black"
+                    app:menu="@menu/drawermenu" />
+            </LinearLayout>
 
         </android.support.v4.widget.DrawerLayout>
     </LinearLayout>

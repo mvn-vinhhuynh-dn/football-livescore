@@ -27,6 +27,7 @@ public class BxhC1Adapter extends RecyclerView.Adapter<BxhC1Adapter.ViewHolder> 
     private Context mContext;
     private ArrayList<GroupC1> mArraylist = new ArrayList<>();
     private ArrayList<String> mHeaders = new ArrayList<>();
+    int a=3,b=4;
 
     public BxhC1Adapter(Context mContext, ArrayList<GroupC1> mArraylist, ArrayList<String> mHeaders) {
         this.mContext = mContext;
@@ -60,6 +61,7 @@ public class BxhC1Adapter extends RecyclerView.Adapter<BxhC1Adapter.ViewHolder> 
     //header
     @Override
     public long getHeaderId(int position) {
+        Log.d("----pos: ",(long) position / 4+"");
         return (long) position / 4;
     }
 
@@ -71,6 +73,8 @@ public class BxhC1Adapter extends RecyclerView.Adapter<BxhC1Adapter.ViewHolder> 
 
     @Override
     public void onBindHeaderViewHolder(ViewHolderHeader holder, int position) {
+
+
         holder.tvGroup.setText(mHeaders.get(position / 4));
     }
 
