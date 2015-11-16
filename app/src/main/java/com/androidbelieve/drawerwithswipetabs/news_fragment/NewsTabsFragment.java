@@ -82,6 +82,7 @@ public class NewsTabsFragment extends BaseFragment {
                             .extra("URL", mArrayListNews.get(position - 1).getLink())
                             .start();
                 }
+
             }
 
             @Override

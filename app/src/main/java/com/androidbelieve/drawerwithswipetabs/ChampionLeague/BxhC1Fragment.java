@@ -29,6 +29,7 @@ import java.util.List;
 import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 
 /**
+ *
  * Created by phulx on 03/11/2015.
  */
 @EFragment(R.layout.bxh_c1_fragment)

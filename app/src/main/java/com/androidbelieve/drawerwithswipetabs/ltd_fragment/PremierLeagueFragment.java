@@ -114,7 +114,6 @@ public class PremierLeagueFragment extends Fragment implements ItemStickyClick {
 
     public void gotoNextMatch() {
         if (mDatas != null && mDatas.size() > 0) {
-            Log.d("vvvv", "pos is: " + getPos(mDatas) + "--name is" + mDatas.get(0).getFixtures().get(getPos(mDatas)).getHomeTeamName());
             mRecycleView.getLayoutManager().scrollToPosition(getPos(mDatas));
         }
     }

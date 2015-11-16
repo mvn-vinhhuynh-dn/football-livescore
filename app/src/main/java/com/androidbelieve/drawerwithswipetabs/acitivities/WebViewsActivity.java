@@ -1,5 +1,6 @@
 package com.androidbelieve.drawerwithswipetabs.acitivities;
 
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -10,6 +11,8 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 
 import com.androidbelieve.drawerwithswipetabs.R;
 import com.androidbelieve.drawerwithswipetabs.util.ObservableWebView;
@@ -36,10 +39,13 @@ import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 public class WebViewsActivity extends AppCompatActivity {
     @ViewById(R.id.webview)
     ObservableWebView mWebView;
+
     @ViewById(R.id.toolbarWebview)
     Toolbar mToolbar;
+
     @ViewById(R.id.progress_dialog_webviews)
     MaterialProgressBar mProgressBar;
+
     @Extra("URL")
     String mUrl;
 
@@ -141,17 +147,36 @@ public class WebViewsActivity extends AppCompatActivity {
          */
 
         //Load url in webview
-
+        final RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         mWebView.loadUrl(url);
         mWebView.setOnScrollChangedCallback(new ObservableWebView.OnScrollChangedCallback() {
             @Override
             public void onScroll(int l, int t) {
+                Log.d("longhv", "toobar: " + mToolbar.isShown());
+
                 if (t > 40) {
                     mToolbar.animate().translationY(-mToolbar.getBottom()).setInterpolator(new AccelerateInterpolator()).start();
+                    mWebView.setLayoutParams(lp);
+                    lp.setMargins(0, 0, 0, 0);
+
                 } else {
                     mToolbar.animate().translationY(0).setInterpolator(new DecelerateInterpolator()).start();
+                    lp.setMargins(0, mToolbar.getHeight(), 0, 0);
+                    mWebView.setLayoutParams(lp);
                 }
+
             }
         });
+    }
+
+
+    private void hideViews() {
+        mToolbar.animate().translationY(-mToolbar.getHeight()).setInterpolator(new AccelerateInterpolator(2));
+
+    }
+
+    private void showViews() {
+        mToolbar.animate().translationY(0).setInterpolator(new DecelerateInterpolator(2));
     }
 }
