@@ -69,4 +69,5 @@
         <item name="android:windowEnterAnimation">@anim/slide_dialog_up</item>
         <item name="android:windowExitAnimation">@anim/slide_dialog_down</item>
     </style>
+
 </resources>

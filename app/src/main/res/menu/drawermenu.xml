@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <item android:title="Lịch Thi Đấu Hôm Nay"
+        android:id="@+id/nav_item_ltdToday"
+        android:icon="@drawable/ic_today" />
+
     <item android:title="Lịch Thi Đấu"
           android:id="@+id/nav_item_ltd"
           android:icon="@drawable/ic_ltd" />
