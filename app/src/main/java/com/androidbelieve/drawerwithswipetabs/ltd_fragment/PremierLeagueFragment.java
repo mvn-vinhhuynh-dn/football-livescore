@@ -5,6 +5,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import com.androidbelieve.drawerwithswipetabs.R;
 import com.androidbelieve.drawerwithswipetabs.acitivities.MatchDetailActivity_;
@@ -44,6 +45,9 @@ public class PremierLeagueFragment extends Fragment implements ItemStickyClick {
     @ViewById(R.id.dialog_pri)
     MaterialProgressBar mMaterialProgressBar;
 
+    @ViewById(R.id.ltd_pri_empty)
+    LinearLayout mEmptyLayout;
+
     @AfterViews
     void afterViews() {
         initView();
@@ -58,6 +62,8 @@ public class PremierLeagueFragment extends Fragment implements ItemStickyClick {
             public void success(LTD ltd) {
                 mDatas.add(ltd);
                 mMaterialProgressBar.setVisibility(View.GONE);
+                mEmptyLayout.setVisibility(View.GONE);
+                mRecycleView.setVisibility(View.VISIBLE);
                 mRecycleView.setAdapter(personAdapter);
                 mRecycleView.addItemDecoration(overlay);
                 mRecycleView.addItemDecoration(top);
@@ -90,7 +96,8 @@ public class PremierLeagueFragment extends Fragment implements ItemStickyClick {
         mLinearLayoutManager = new LinearLayoutManager(getActivity()
                 .getBaseContext());
         mRecycleView.setLayoutManager(mLinearLayoutManager);
-
+        mEmptyLayout.setVisibility(View.VISIBLE);
+        mRecycleView.setVisibility(View.GONE);
     }
 
     private int getPos(ArrayList<LTD> data) {
