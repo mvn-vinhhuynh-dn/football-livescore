@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <ImageView
+        android:id="@+id/imgDetailsTroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:minHeight="1000dp"
+        android:minWidth="1000dp"
         android:scaleType="center"
-        android:id="@+id/imgDetailsTroll"
-        android:src="@drawable/ic_chelsea"
-        android:minWidth="1000px"
-        android:minHeight="1000px"/>
-</LinearLayout>
+        android:src="@drawable/ic_chelsea" />
+
+    <ImageView
+        android:id="@+id/img_share_facebook"
+        android:layout_width="@dimen/height_60dp"
+        android:layout_height="@dimen/height_20dp"
+        android:layout_alignRight="@+id/imgDetailsTroll"
+        android:layout_marginRight="@dimen/margin_5"
+        android:layout_marginTop="@dimen/margin_10"
+        android:src="@drawable/ic_share_facebook" />
+</RelativeLayout>

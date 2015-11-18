@@ -11,6 +11,11 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
         <activity
             android:name=".MainActivity_"
             android:label="@string/app_name"
@@ -23,7 +28,8 @@
         </activity>
         <activity
             android:name=".acitivities.MatchDetailActivity_"
-            android:windowSoftInputMode="adjustResize|stateHidden" /><activity
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
             android:name=".footballclubinfor.FootBallClubInformationActivity_"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
@@ -35,5 +41,16 @@
         <activity
             android:name=".troll_fragment.VideoTrollDialog"
             android:windowSoftInputMode="adjustResize|stateHidden" />
+
+        <provider
+            android:name="com.facebook.FacebookContentProvider"
+            android:authorities="com.facebook.app.FacebookContentProvider112241672473854"
+            android:exported="true" />
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
     </application>
 </manifest>

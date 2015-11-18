@@ -6,4 +6,5 @@
     <string name="base_url">http://api.football-data.org</string>
     <string name="detail_match">Chi tiết trận đấu</string>
     <string name="key">AIzaSyBD_R9hyMXrqYZMBtUSu2o0Rj6sDXVft4w</string>
+    <string name="facebook_app_id">112241672473854</string>
 </resources>
