@@ -1,9 +1,9 @@
 package com.androidbelieve.drawerwithswipetabs.troll_fragment;
 
 import android.content.Intent;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 
 import com.androidbelieve.drawerwithswipetabs.R;
@@ -17,6 +17,7 @@ import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
+import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -67,21 +68,16 @@ public class TrollFragment extends BaseFragment {
         mRecycleTroll.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), mRecycleTroll, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                if (checkVideoYoutube(mArraylist.get(position).getImg())){
-
-//                    VideoTrollDialog_.builder()
-//                            .url("https://www.youtube.com/watch?v="+mArraylist.get(position).getImg().substring(26, 37))
-//                            .build().show(getChildFragmentManager(),"videotroll");
-
-                    Intent in = new Intent(getActivity(),VideoTrollDialog.class);
-                    in.putExtra("url",mArraylist.get(position).getImg().substring(26, 37));
-                            getActivity().startActivity(in);
+                if (checkVideoYoutube(mArraylist.get(position).getImg())) {
+                    Intent in = new Intent(getActivity(), VideoTrollDialog.class);
+                    in.putExtra("url", mArraylist.get(position).getImg().substring(26, 37));
+                    getActivity().startActivity(in);
 
                 } else {
                     ImageTrollDialog mDialog = ImageTrollDialog_.builder()
                             .mtroll(mArraylist.get(position))
                             .build();
-                    mDialog.show(getChildFragmentManager(), "ImageTroll");
+                    mDialog.show(getChildFragmentManager(), "Image_Troll");
                 }
             }
 
@@ -91,8 +87,9 @@ public class TrollFragment extends BaseFragment {
             }
         }));
     }
+
     //add Loadmore for RecycleView
-    public void loadmore(){
+    public void loadmore() {
 
         mRecycleTroll.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -117,20 +114,74 @@ public class TrollFragment extends BaseFragment {
     @Background
     void loadData(String url) {
         Document document = null;
+        Connection con = Jsoup.connect(url)
+                .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.2 (KHTML, like Gecko) Chrome/15.0.874.120 Safari/535.2");
+//                .timeout(13000);
         try {
-            document = Jsoup.connect(url)
-                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.2 (KHTML, like Gecko) Chrome/15.0.874.120 Safari/535.2").get();
+            Connection.Response resp = con.ignoreHttpErrors(true).followRedirects(true).execute();
+            if (resp.statusCode() == 200) {
+                loading = true;
+                document = con.get();
+                if (document != null) {
+                    Element element = document.select("div#itemListSecondary").first();
+                    if (element != null) {
+                        Elements listDiv = element.select("div[class=panel panel-default itemContainer itemContainerLast]");
+                        if (listDiv != null) {
+                            for (int i = 0; i < listDiv.size(); i++) {
+                                Troll troll = new Troll();
+                                if (isAdd(listDiv.get(i).select("div.catItemBody").first().select("img").attr("src").toString())) {
+                                    troll.setImg("http://trollbongda.com" + listDiv.get(i).select("div.catItemBody").first().select("img").attr("src").toString());
+                                    troll.setContent(listDiv.get(i).select("div.catItemBody").first().select("img").attr("alt").toString());
+                                } else {
+                                    troll.setImg(listDiv.get(i).select("div.catItemBody").first().select("img").attr("src").toString());
+                                    troll.setContent(listDiv.get(i).select("div.catItemBody").first().select("img").attr("alt").toString());
+                                }
+                                mArraylist.add(troll);
+                            }
+
+                            setAdapter();
+                        }
+                    }
+                }
+            } else if (resp.statusCode() == 307) {
+                loading = true;
+                String sUrl = "";
+                String sNewUrl = resp.header("Location");
+                if (sNewUrl != null && sNewUrl.length() > 7)
+                    sUrl = sNewUrl;
+                resp = Jsoup.connect(sUrl)
+//                        .timeout(13000)
+                        .execute();
+                document = resp.parse();
+                if (document != null) {
+                    Element element = document.select("div#itemListSecondary").first();
+                    if (element != null) {
+                        Elements listDiv = element.select("div[class=panel panel-default itemContainer itemContainerLast]");
+                        if (listDiv != null) {
+                            for (int i = 0; i < listDiv.size(); i++) {
+                                Troll troll = new Troll();
+                                if (isAdd(listDiv.get(i).select("div.catItemBody").first().select("img").attr("src").toString())) {
+                                    troll.setImg("http://trollbongda.com" + listDiv.get(i).select("div.catItemBody").first().select("img").attr("src").toString());
+                                    troll.setContent(listDiv.get(i).select("div.catItemBody").first().select("img").attr("alt").toString());
+                                } else {
+                                    troll.setImg(listDiv.get(i).select("div.catItemBody").first().select("img").attr("src").toString());
+                                    troll.setContent(listDiv.get(i).select("div.catItemBody").first().select("img").attr("alt").toString());
+                                }
+                                mArraylist.add(troll);
+                            }
+
+                            setAdapter();
+                        }
+                    }
+                }
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        if (document != null) {
-            loading =true;
-            getdata(document);
-        }
+        setAdapter();
     }
 
-    private boolean checkVideoYoutube(String url){
+    private boolean checkVideoYoutube(String url) {
         if (url.startsWith("http://img.youtube.com")) {
             return true;
         }
@@ -144,33 +195,19 @@ public class TrollFragment extends BaseFragment {
         return true;
     }
 
-    private void getdata(Document document) {
-        Element element = document.select("div#itemListSecondary").first();
-        if (element != null) {
-            Elements listDiv = element.select("div[class=panel panel-default itemContainer itemContainerLast]");
-            if (listDiv != null) {
-                for (int i = 0; i < listDiv.size(); i++) {
-                    Troll troll = new Troll();
-                        if (isAdd(listDiv.get(i).select("div.catItemBody").first().select("img").attr("src").toString())){
-                            troll.setImg("http://trollbongda.com" + listDiv.get(i).select("div.catItemBody").first().select("img").attr("src").toString());
-                            troll.setContent(listDiv.get(i).select("div.catItemBody").first().select("img").attr("alt").toString());
-                        } else {
-                            troll.setImg(listDiv.get(i).select("div.catItemBody").first().select("img").attr("src").toString());
-                            troll.setContent(listDiv.get(i).select("div.catItemBody").first().select("img").attr("alt").toString());
-                        }
-                      mArraylist.add(troll);
-                }
-
-                setAdapter();
-            }
-
-        }
-
-    }
-
     @UiThread
     public void setAdapter() {
         mProgressDialogTroll.setVisibility(View.INVISIBLE);
         mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Fragment fragment;
+        fragment = getFragmentManager().findFragmentByTag("Image_Troll");
+        if (fragment != null && fragment instanceof ImageTrollDialog) {
+            ((ImageTrollDialog) fragment).onActivityResult(requestCode, resultCode, data);
+        }
     }
 }

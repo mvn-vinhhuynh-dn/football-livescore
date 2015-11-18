@@ -1,10 +1,9 @@
 package com.androidbelieve.drawerwithswipetabs;
 
-import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.os.Build;
+import android.content.Intent;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -13,7 +12,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -41,6 +39,7 @@ import org.androidannotations.annotations.ViewById;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 
 @EActivity(R.layout.activity_main)
 public class MainActivity extends AppCompatActivity implements BaseFragment.OnBaseFragmentListener, View.OnTouchListener {
@@ -73,26 +72,26 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnBa
 
 
         mCheckConnection = new CheckConnection(this);
-        if (mCheckConnection.hasConnection()){
-        intViews();
-        clickMenu();
-        ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolBar, R.string.app_name,
-                R.string.app_name);
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
-        mDrawerToggle.syncState();
+        if (mCheckConnection.hasConnection()) {
+            intViews();
+            clickMenu();
+            ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolBar, R.string.app_name,
+                    R.string.app_name);
+            mDrawerLayout.setDrawerListener(mDrawerToggle);
+            mDrawerToggle.syncState();
         } else {
-            showAlertDialog(this,"No Conection");
+            showAlertDialog(this, "No Conection");
         }
         setDrawerLayoutMargin();
     }
 
     private void setDrawerLayoutMargin() {
-        LinearLayout.LayoutParams layoutParams =  new LinearLayout.LayoutParams(
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.MATCH_PARENT);
         if (android.os.Build.VERSION.SDK_INT < 21) {
             layoutParams.setMargins(0, 0, 0, 0);
-        }else {
+        } else {
             layoutParams.setMargins(0, -100, 0, 0);
         }
         mNavigationView.setLayoutParams(layoutParams);
@@ -208,6 +207,27 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnBa
             }
         });
         alertDialog.show();
+    }
+
+    public Fragment getVisibleFragment() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        List<Fragment> fragments = fragmentManager.getFragments();
+        if (fragments != null) {
+            for (Fragment fragment : fragments) {
+                if (fragment != null && fragment.isVisible())
+                    return fragment;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Fragment curentFragment = getVisibleFragment();
+        if (curentFragment instanceof TrollFragment_) {
+            ((TrollFragment) curentFragment).onActivityResult(requestCode, resultCode, data);
+        }
     }
 }
 
