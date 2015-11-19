@@ -14,7 +14,7 @@ import com.androidbelieve.footballlivescore.MainActivity_;
 public abstract class BaseFragment extends Fragment {
     protected OnBaseFragmentListener mOnBaseFragmentListener;
     protected Context mContext;
-
+    //
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);

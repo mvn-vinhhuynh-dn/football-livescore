@@ -17,7 +17,7 @@ android {
 
     defaultConfig {
         multiDexEnabled true
-        applicationId "com.androidbelieve.drawerwithswipetabs"
+        applicationId "com.androidbelieve.footballlivescore"
         minSdkVersion 15
         targetSdkVersion 22
         versionCode 1
