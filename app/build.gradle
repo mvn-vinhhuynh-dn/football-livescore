@@ -71,5 +71,5 @@ dependencies {
     compile 'com.joooonho:selectableroundedimageview:1.0.1'
     compile 'com.commit451:PhotoView:1.2.4'
     compile files('libs/YouTubeAndroidPlayerApi.jar')
-    compile 'com.facebook.android:facebook-android-sdk:4.7.0'
+    compile 'com.facebook.android:facebook-android-sdk:4.5.0'
 }

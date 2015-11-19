@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.androidbelieve.drawerwithswipetabs.util.ObservableWebView
+        <com.androidbelieve.footballlivescore.util.ObservableWebView
             android:id="@+id/webview"
             android:layout_width="match_parent"
             android:layout_marginTop="@dimen/height_50dp"
