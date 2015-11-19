@@ -72,5 +72,4 @@ dependencies {
     compile 'com.commit451:PhotoView:1.2.4'
     compile files('libs/YouTubeAndroidPlayerApi.jar')
     compile 'com.facebook.android:facebook-android-sdk:4.7.0'
-    compile 'com.bignerdranch.android:expandablerecyclerview:2.0.3'
 }
