@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 
 import com.androidbelieve.footballlivescore.MainActivity_;
 
-
 /**
  * Copyright © 2015 AsianTech inc.
  * Created by VinhHlb on 10/6/15.
