@@ -11,8 +11,7 @@ import android.view.View;
 
 import com.androidbelieve.footballlivescore.R;
 import com.androidbelieve.footballlivescore.models.LtdFootballClub;
-import com.androidbelieve.footballlivescore.ltdfootballclub.PlayedFragment_;
-import com.androidbelieve.footballlivescore.ltdfootballclub.PlayingFragment_;
+
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EActivity;
