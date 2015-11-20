@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center_vertical"
-    android:orientation="horizontal">
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -11,15 +11,16 @@
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="3dp"
-        android:weightSum="7.8">
+        android:weightSum="8.6">
+
         <TextView
+            android:id="@+id/tvDateToday"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.8"
-            android:text="FT"
             android:layout_marginBottom="@dimen/margin_5"
+            android:layout_weight="0.8"
             android:gravity="center"
-            android:id="@+id/tvDateToday"
+            android:text="FT"
             android:textSize="12sp" />
 
         <LinearLayout
@@ -36,16 +37,16 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="2"
-                android:gravity="center"
-                android:text="Chealse"
-
-                android:singleLine="true"
                 android:ellipsize="marquee"
+                android:focusable="true"
+
+                android:focusableInTouchMode="true"
+                android:freezesText="true"
+                android:gravity="center"
                 android:marqueeRepeatLimit="marquee_forever"
                 android:scrollHorizontally="true"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:freezesText="true"/>
+                android:singleLine="true"
+                android:text="Chealse" />
 
             <ImageView
                 android:id="@+id/home_icon_Today"
@@ -75,7 +76,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_arrow_drop_down_black_36dp" />
+                android:src="@drawable/ic_arrow_drop_down_black_36dp"
+                android:id="@+id/imgRate"/>
         </LinearLayout>
 
         <LinearLayout
@@ -100,16 +102,268 @@
                 android:layout_gravity="center"
                 android:layout_marginRight="@dimen/margin_5"
                 android:layout_weight="2"
-                android:gravity="center"
-                android:text="Manchester United"
-
-                android:singleLine="true"
                 android:ellipsize="marquee"
+                android:focusable="true"
+
+                android:focusableInTouchMode="true"
+                android:freezesText="true"
+                android:gravity="center"
                 android:marqueeRepeatLimit="marquee_forever"
                 android:scrollHorizontally="true"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:freezesText="true"/>
+                android:singleLine="true"
+                android:text="Manchester United" />
+
         </LinearLayout>
+        <TextView
+            android:id="@+id/tvRateToday"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_5"
+            android:layout_weight="0.8"
+            android:gravity="center"
+            android:text="Tỷ Lệ"
+            android:layout_marginRight="5dp"
+            android:textSize="12sp"
+            android:background="@drawable/bg_rate_today"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llRateLtdToday"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/height_20dp"
+        android:layout_marginLeft="@dimen/height_10dp"
+        android:layout_marginRight="@dimen/height_10dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ccc"
+            android:weightSum="8">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:gravity="center"
+                android:text="Tỉ lệ"
+                android:textColor="#66BB6A"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Chủ"
+                android:textSize="11sp"
+                android:textStyle="italic" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Khách"
+                android:textSize="11sp"
+                android:textStyle="italic" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Tài/Xỉu"
+                android:textColor="#66BB6A"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Chủ"
+                android:textSize="11sp"
+                android:textStyle="italic" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Khách"
+                android:textSize="11sp"
+                android:textStyle="italic" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="8">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:gravity="center"
+                android:text="Cả trận "
+                android:textColor="#EF5350"
+                android:textSize="11sp" />
+
+            <TextView
+                android:id="@+id/tvHdp_rte"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:gravity="center"
+                android:text="0 : 1/2"
+                android:textColor="#66BB6A"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvHdp_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="-0.95"
+                android:textSize="11sp"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/tvHdp_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="-0.95"
+                android:textSize="11sp"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/tvOue_rte"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="2"
+                android:textColor="#66BB6A"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvOue_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="-0.94"
+                android:textSize="11sp"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/tvOue_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="0.84"
+                android:textSize="11sp"
+                android:textStyle="italic" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="8">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:gravity="center"
+                android:text="Hiệp 1"
+                android:textColor="#EF5350"
+                android:textSize="11sp" />
+
+            <TextView
+                android:id="@+id/tvHdp_rte_h1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:gravity="center"
+                android:text="0 : 1/2"
+                android:textColor="#66BB6A"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvHdp_1_h1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="-0.95"
+                android:textSize="11sp"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/tvHdp_2_h1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="-0.95"
+                android:textSize="11sp"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/tvOue_rte_h1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="2"
+                android:textColor="#66BB6A"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvOue_1_h1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="-0.94"
+                android:textSize="11sp"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/tvOue_2_h1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="0.84"
+                android:textSize="11sp"
+                android:textStyle="italic" />
+
+        </LinearLayout>
+
     </LinearLayout>
 </LinearLayout>
