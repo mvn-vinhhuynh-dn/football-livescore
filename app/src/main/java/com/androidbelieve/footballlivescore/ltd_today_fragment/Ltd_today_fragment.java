@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 
 /**
+ *
  * Created by phulx on 11/11/2015.
  */
 @EFragment(R.layout.ltd_today_fragment)
@@ -157,6 +158,7 @@ public class Ltd_today_fragment extends BaseFragment {
 
                 }
                 mArraylist.add(ltdToday);
+
             }
         }
     }

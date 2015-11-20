@@ -32,6 +32,7 @@ public class LtdToday {
         private String oue_rte;
         private String oue_1;
         private String oue_2;
+        private boolean isOpen = false;
     }
     @Data
     public class Hiep1 {
