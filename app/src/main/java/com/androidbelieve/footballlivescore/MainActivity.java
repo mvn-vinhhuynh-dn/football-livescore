@@ -83,21 +83,21 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnBa
         } else {
             showAlertDialog(this, "No Conection");
         }
-        setDrawerLayoutMargin();
+//        setDrawerLayoutMargin();
     }
 
-    private void setDrawerLayoutMargin() {
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.MATCH_PARENT);
-        if (android.os.Build.VERSION.SDK_INT < 21) {
-            layoutParams.setMargins(0, 0, 0, 0);
-        } else {
-            layoutParams.setMargins(0, -100, 0, 0);
-        }
-        mNavigationView.setLayoutParams(layoutParams);
-
-    }
+//    private void setDrawerLayoutMargin() {
+//        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+//                LinearLayout.LayoutParams.MATCH_PARENT,
+//                LinearLayout.LayoutParams.MATCH_PARENT);
+//        if (android.os.Build.VERSION.SDK_INT < 21) {
+//            layoutParams.setMargins(0, 0, 0, 0);
+//        } else {
+//            layoutParams.setMargins(0, -100, 0, 0);
+//        }
+//        mNavigationView.setLayoutParams(layoutParams);
+//
+//    }
 
     private void intViews() {
         Ltd_today_fragment ltd_today_fragment = new Ltd_today_fragment_();

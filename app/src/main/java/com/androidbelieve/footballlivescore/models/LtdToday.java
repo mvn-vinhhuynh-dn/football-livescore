@@ -3,8 +3,8 @@ package com.androidbelieve.footballlivescore.models;
 import lombok.Data;
 
 /**
- *
- * Created by phulx on 11/11/2015.
+ * Copyright © 2015 AsianTech inc.
+ * Created by VinhHlb on 11/11/2015.
  */
 @Data
 public class LtdToday {

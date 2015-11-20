@@ -88,7 +88,7 @@ public class LtdTodayAdapter extends RecyclerView.Adapter<LtdTodayAdapter.Viewho
         holder.tvRateToday.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mArraylist.get(position).getCatran().isOpen()) {
+                if (mArraylist.get(position).getCatran() != null && mArraylist.get(position).getCatran().isOpen()) {
                     mArraylist.get(position).getCatran().setOpen(false);
                 } else {
                     mArraylist.get(position).getCatran().setOpen(true);
