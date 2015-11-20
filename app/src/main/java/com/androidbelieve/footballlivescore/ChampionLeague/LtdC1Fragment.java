@@ -24,7 +24,8 @@ import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 import retrofit.RetrofitError;
 
 /**
- * Created by phulx on 03/11/2015.
+ * Copyright © 2015 AsianTech inc.
+ * Created by VinhHlb on 03/11/2015.
  */
 @EFragment(R.layout.ltd_c1_fragment)
 public class LtdC1Fragment extends BaseFragment {

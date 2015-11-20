@@ -5,7 +5,8 @@ import java.io.Serializable;
 import lombok.Data;
 
 /**
- * Created by phulx on 05/11/2015.
+ * Copyright © 2015 AsianTech inc.
+ * Created by VinhHlb on 05/11/2015.
  */
 @Data
 public class Troll implements Serializable{

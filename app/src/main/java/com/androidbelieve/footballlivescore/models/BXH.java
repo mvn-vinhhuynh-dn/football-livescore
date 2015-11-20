@@ -7,7 +7,8 @@ import java.util.ArrayList;
 import lombok.Data;
 
 /**
- * Created by phulx on 23/10/2015.
+ * Copyright © 2015 AsianTech inc.
+ * Created by VinhHlb on 23/10/2015.
  */
 @Data
 public class BXH {

@@ -1,4 +1,4 @@
-package com.androidbelieve.footballlivescore.views;
+package com.androidbelieve.footballlivescore.abstracts;
 
 /**
  * Copyright © 2015 AsianTech inc.
