@@ -29,6 +29,7 @@ import com.androidbelieve.footballlivescore.ltd_today_fragment.Ltd_today_fragmen
 import com.androidbelieve.footballlivescore.ltd_today_fragment.Ltd_today_fragment_;
 import com.androidbelieve.footballlivescore.news_fragment.NewsTabsFragment;
 import com.androidbelieve.footballlivescore.news_fragment.NewsTabsFragment_;
+import com.androidbelieve.footballlivescore.testpain.PaintActivity_;
 import com.androidbelieve.footballlivescore.troll_fragment.TrollFragment;
 import com.androidbelieve.footballlivescore.troll_fragment.TrollFragment_;
 import com.androidbelieve.footballlivescore.util.CheckConnection;
@@ -145,7 +146,9 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnBa
                     changeFragment(trollFragment, true);
                     mToolBar.setTitle("Troll Bóng Đá");
                 }
-
+                if(menuItem.getItemId() == R.id.nav_item_help){
+                    PaintActivity_.intent(MainActivity.this).start();
+                }
                 return false;
             }
 

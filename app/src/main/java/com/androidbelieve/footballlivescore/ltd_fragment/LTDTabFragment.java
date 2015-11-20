@@ -9,7 +9,7 @@ import android.view.View;
 
 import com.androidbelieve.footballlivescore.R;
 import com.androidbelieve.footballlivescore.abstracts.BaseFragment;
-import com.androidbelieve.footballlivescore.views.ABaseTransformer;
+import com.androidbelieve.footballlivescore.abstracts.ABaseTransformer;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EFragment;
