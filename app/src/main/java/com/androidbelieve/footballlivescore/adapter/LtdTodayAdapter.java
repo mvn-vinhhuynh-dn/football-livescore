@@ -59,6 +59,11 @@ public class LtdTodayAdapter extends RecyclerView.Adapter<LtdTodayAdapter.Viewho
             holder.tvOue_1_h1.setText(mArraylist.get(position).getHiep1().getOue_1());
             holder.tvOue_2_h1.setText(mArraylist.get(position).getHiep1().getOue_2());
         }
+        if (mArraylist.get(position).getCatran()!= null) {
+            holder.tvRateToday.setVisibility(View.VISIBLE);
+        } else {
+            holder.tvRateToday.setVisibility(View.GONE);
+        }
         if (mArraylist.get(position).getCatran() != null && mArraylist.get(position).getCatran().isOpen()) {
             holder.llRateLtdToday.setVisibility(View.VISIBLE);
         } else {
@@ -88,7 +93,7 @@ public class LtdTodayAdapter extends RecyclerView.Adapter<LtdTodayAdapter.Viewho
         holder.tvRateToday.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mArraylist.get(position).getCatran() != null && mArraylist.get(position).getCatran().isOpen()) {
+                if (mArraylist.get(position).getCatran().isOpen()) {
                     mArraylist.get(position).getCatran().setOpen(false);
                 } else {
                     mArraylist.get(position).getCatran().setOpen(true);

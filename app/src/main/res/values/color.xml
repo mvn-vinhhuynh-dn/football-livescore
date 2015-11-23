@@ -4,4 +4,5 @@
     <color name="orange">#66BB6A</color>
     <color name="white">#FFF</color>
     <color name="red">#DD2C00</color>
+    <color name="header">#d7ccc8</color>
 </resources>
