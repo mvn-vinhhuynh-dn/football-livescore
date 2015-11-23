@@ -563,45 +563,45 @@ public class CheckTeamNameSetLogo {
 
             //Ligue 1
             case "Paris Saint-Germain":
-                break;
+                return InformationFootBallClub.PARIS_SAINT_GERMAIN_FC;
             case "Angers SCO":
-                break;
+                return InformationFootBallClub.ANGERS_SCO;
             case "SM Caen":
-                break;
+                return InformationFootBallClub.STADE_MALHERBE_CAEN;
             case "AS Saint-Étienne":
-                break;
+                return InformationFootBallClub.AS_SAINT_ÉTIENNE;
             case "OGC Nice":
-                break;
+                return InformationFootBallClub.O_G_C_NICE_CÔTE_D_AZUR;
             case "Olympique Lyonnais":
-                break;
+                return InformationFootBallClub.OLYMPIQUE_LYONNAIS;
             case "Stade Rennais FC":
-                break;
+                return InformationFootBallClub.STADE_RENNAIS_FC;
             case "Stade de Reims":
-                break;
+                return InformationFootBallClub.STADE_DE_REIMS;
             case "FC Lorient":
-                break;
+                return InformationFootBallClub.FC_LORIENT;
             case "AS Monaco FC":
-                break;
+                return InformationFootBallClub.ASP_MONACO_FC;
             case "EA Guingamp":
-                break;
+                return InformationFootBallClub.EN_AVANT_GUINGAMP;
             case "FC Nantes":
-                break;
+                return InformationFootBallClub.FC_NANTES;
             case "OSC Lille":
-                break;
+                return InformationFootBallClub.LILLE_OSC_MÉTROPOLE;
             case "FC Girondins de Bordeaux":
-                break;
+                return InformationFootBallClub.FC_GIRONDINS_DE_BORDEAUX;
             case "SC Bastia":
-                break;
+                return InformationFootBallClub.SC_BASTIA;
             case "Olympique de Marseille":
-                break;
+                return InformationFootBallClub.OLYMPIQUE_DE_MARSEILLE;
             case "Toulouse FC":
-                break;
+                return InformationFootBallClub.TOULOUSE_FC;
             case "Montpellier Hérault SC":
-                break;
+                return InformationFootBallClub.MONTPELLIER_HSC;
             case "ES Troyes AC":
-                break;
+                return InformationFootBallClub.ESPÉRANCE_SPORTIVE_TROYES_AUBE_CHAMPAGNE;
             case "Gazélec Ajaccio":
-                break;
+                return InformationFootBallClub.GAZÉLEC_FCO_AJACCIO;
             //c1-----------------
             case "PSV Eindhoven":
                 break;
@@ -806,45 +806,45 @@ public class CheckTeamNameSetLogo {
 
             //Ligue 1
             case "Paris Saint-Germain":
-                break;
+                return InformationFootBallClub.PARIS_SAINT_GERMAIN_FC_LTD;
             case "Angers SCO":
-                break;
+                return InformationFootBallClub.ANGERS_SCO_LTD;
             case "SM Caen":
-                break;
+                return InformationFootBallClub.STADE_MALHERBE_CAEN_LTD;
             case "AS Saint-Étienne":
-                break;
+                return InformationFootBallClub.AS_SAINT_ÉTIENNE_LTD;
             case "OGC Nice":
-                break;
+                return InformationFootBallClub.O_G_C_NICE_CÔTE_D_AZUR_LTD;
             case "Olympique Lyonnais":
-                break;
+                return InformationFootBallClub.OLYMPIQUE_LYONNAIS_LTD;
             case "Stade Rennais FC":
-                break;
+                return InformationFootBallClub.STADE_RENNAIS_FC_LTD;
             case "Stade de Reims":
-                break;
+                return InformationFootBallClub.STADE_DE_REIMS_LTD;
             case "FC Lorient":
-                break;
+                return InformationFootBallClub.FC_LORIENT_LTD;
             case "AS Monaco FC":
-                break;
+                return InformationFootBallClub.ASP_MONACO_FC_LTD;
             case "EA Guingamp":
-                break;
+                return InformationFootBallClub.EN_AVANT_GUINGAMP_LTD;
             case "FC Nantes":
-                break;
+                return InformationFootBallClub.FC_NANTES_LTD;
             case "OSC Lille":
-                break;
+                return InformationFootBallClub.LILLE_OSC_MÉTROPOLE_LTD;
             case "FC Girondins de Bordeaux":
-                break;
+                return InformationFootBallClub.FC_GIRONDINS_DE_BORDEAUX_LTD;
             case "SC Bastia":
-                break;
+                return InformationFootBallClub.SC_BASTIA_LTD;
             case "Olympique de Marseille":
-                break;
+                return InformationFootBallClub.OLYMPIQUE_DE_MARSEILLE_LTD;
             case "Toulouse FC":
-                break;
+                return InformationFootBallClub.TOULOUSE_FC_LTD;
             case "Montpellier Hérault SC":
-                break;
+                return InformationFootBallClub.MONTPELLIER_HSC_LTD;
             case "ES Troyes AC":
-                break;
+                return InformationFootBallClub.ESPÉRANCE_SPORTIVE_TROYES_AUBE_CHAMPAGNE_LTD;
             case "Gazélec Ajaccio":
-                break;
+                return InformationFootBallClub.GAZÉLEC_FCO_AJACCIO_LTD;
             //c1-----------------
             case "PSV Eindhoven":
                 break;

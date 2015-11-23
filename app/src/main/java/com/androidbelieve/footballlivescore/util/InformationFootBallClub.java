@@ -5,6 +5,29 @@ package com.androidbelieve.footballlivescore.util;
  * Created by VinhHlb on 11/4/15.
  */
 public class InformationFootBallClub {
+    //LEAGUE ONE
+    public static final String AS_SAINT_ÉTIENNE = "http://livescore.bongdaplus.vn/doi-bong/cau-thu/901/s-e-tienne.bdscore";
+    public static final String OLYMPIQUE_DE_MARSEILLE = "http://livescore.bongdaplus.vn/doi-bong/cau-thu/890/marseille.bdscore";
+    public static final String OLYMPIQUE_LYONNAIS = "http://livescore.bongdaplus.vn/doi-bong/cau-thu/884/lyon.bdscore";
+    public static final String MONTPELLIER_HSC = "http://livescore.bongdaplus.vn/doi-bong/cau-thu/906/montpellier.bdscore";
+    public static final String PARIS_SAINT_GERMAIN_FC = "http://livescore.bongdaplus.vn/doi-bong/cau-thu/886/psg.bdscore";
+    public static final String ESPÉRANCE_SPORTIVE_TROYES_AUBE_CHAMPAGNE = "http://livescore.bongdaplus.vn/doi-bong/cau-thu/914/troyes.bdscore";
+    public static final String ANGERS_SCO = "http://livescore.bongdaplus.vn/doi-bong/cau-thu/918/angers.bdscore";
+    public static final String LILLE_OSC_MÉTROPOLE = "http://livescore.bongdaplus.vn/doi-bong/cau-thu/895/lille.bdscore ";
+    public static final String FC_NANTES = "http://livescore.bongdaplus.vn/doi-bong/cau-thu/889/nantes.bdscore";
+    public static final String SC_BASTIA = "http://livescore.bongdaplus.vn/doi-bong/cau-thu/897/bastia.bdscore";
+    public static final String GAZÉLEC_FCO_AJACCIO = "http://livescore.bongdaplus.vn/doi-bong/cau-thu/931/ajaccio.bdscore";
+    public static final String FC_LORIENT = "http://livescore.bongdaplus.vn/doi-bong/cau-thu/907/lorient.bdscore";
+    public static final String STADE_DE_REIMS = "http://livescore.bongdaplus.vn/doi-bong/cau-thu/921/reims.bdscore";
+    public static final String STADE_RENNAIS_FC = "http://livescore.bongdaplus.vn/doi-bong/cau-thu/893/rennes.bdscore";
+    public static final String TOULOUSE_FC = "http://livescore.bongdaplus.vn/doi-bong/cau-thu/899/toulouse.bdscore";
+    public static final String O_G_C_NICE_CÔTE_D_AZUR = "http://livescore.bongdaplus.vn/doi-bong/cau-thu/894/nice.bdscore";
+    public static final String EN_AVANT_GUINGAMP = "http://livescore.bongdaplus.vn/doi-bong/cau-thu/904/guingamp.bdscore";
+    public static final String FC_GIRONDINS_DE_BORDEAUX = "http://livescore.bongdaplus.vn/doi-bong/cau-thu/891/bordeaux.bdscore";
+    public static final String STADE_MALHERBE_CAEN = "http://livescore.bongdaplus.vn/doi-bong/cau-thu/902/caen.bdscore";
+    public static final String ASP_MONACO_FC = "http://livescore.bongdaplus.vn/doi-bong/cau-thu/902/caen.bdscore";
+
+
     //PRIMER LEAGUE
     public static final String CHELSEA = "http://livescore.bongdaplus.vn/doi-bong/cau-thu/661/chelsea.bdscore";
     public static final String MAN_CITY = "http://livescore.bongdaplus.vn/doi-bong/cau-thu/676/manchester-city.bdscore";
@@ -176,4 +199,26 @@ public class InformationFootBallClub {
     public static final String REAL_SPORTING_DE_GIJÓN_LTD = "http://livescore.bongdaplus.vn/doi-bong/2038/sporting-gijon.bdscore";
     public static final String SEVILLA_FC_LTD = "http://livescore.bongdaplus.vn/doi-bong/2021/sevilla.bdscore";
     public static final String REAL_MADRID_CLUB_DE_FÚTBOL_LTD = "http://livescore.bongdaplus.vn/doi-bong/2016/real-madrid.bdscore";
+
+    //LTD - LEAGUE ONE
+    public static final String AS_SAINT_ÉTIENNE_LTD = "http://livescore.bongdaplus.vn/doi-bong/901/s-e-tienne.bdscore";
+    public static final String OLYMPIQUE_DE_MARSEILLE_LTD = "http://livescore.bongdaplus.vn/doi-bong/890/marseille.bdscore";
+    public static final String OLYMPIQUE_LYONNAIS_LTD = "http://livescore.bongdaplus.vn/doi-bong/884/lyon.bdscore";
+    public static final String MONTPELLIER_HSC_LTD = "http://livescore.bongdaplus.vn/doi-bong/906/montpellier.bdscore";
+    public static final String PARIS_SAINT_GERMAIN_FC_LTD = "http://livescore.bongdaplus.vn/doi-bong/886/psg.bdscore";
+    public static final String ESPÉRANCE_SPORTIVE_TROYES_AUBE_CHAMPAGNE_LTD = "http://livescore.bongdaplus.vn/doi-bong/914/troyes.bdscore";
+    public static final String ANGERS_SCO_LTD = "http://livescore.bongdaplus.vn/doi-bong/918/angers.bdscore";
+    public static final String LILLE_OSC_MÉTROPOLE_LTD = "http://livescore.bongdaplus.vn/doi-bong/895/lille.bdscore";
+    public static final String FC_NANTES_LTD = "http://livescore.bongdaplus.vn/doi-bong/889/nantes.bdscore";
+    public static final String SC_BASTIA_LTD = "http://livescore.bongdaplus.vn/doi-bong/897/bastia.bdscore";
+    public static final String GAZÉLEC_FCO_AJACCIO_LTD = "http://livescore.bongdaplus.vn/doi-bong/931/ajaccio.bdscore";
+    public static final String FC_LORIENT_LTD = "http://livescore.bongdaplus.vn/doi-bong/907/lorient.bdscore";
+    public static final String STADE_DE_REIMS_LTD = "http://livescore.bongdaplus.vn/doi-bong/921/reims.bdscore";
+    public static final String STADE_RENNAIS_FC_LTD = "http://livescore.bongdaplus.vn/doi-bong/893/rennes.bdscore";
+    public static final String TOULOUSE_FC_LTD = "http://livescore.bongdaplus.vn/doi-bong/899/toulouse.bdscore";
+    public static final String O_G_C_NICE_CÔTE_D_AZUR_LTD = "http://livescore.bongdaplus.vn/doi-bong/894/nice.bdscore";
+    public static final String EN_AVANT_GUINGAMP_LTD = "http://livescore.bongdaplus.vn/doi-bong/904/guingamp.bdscore";
+    public static final String FC_GIRONDINS_DE_BORDEAUX_LTD = "http://livescore.bongdaplus.vn/doi-bong/891/bordeaux.bdscore";
+    public static final String STADE_MALHERBE_CAEN_LTD = "http://livescore.bongdaplus.vn/doi-bong/902/caen.bdscore";
+    public static final String ASP_MONACO_FC_LTD = "http://livescore.bongdaplus.vn/doi-bong/885/monaco.bdscore";
 }

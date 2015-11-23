@@ -139,7 +139,21 @@ public class AuthApi {
         });
     }
 
-    public static void getLtdC1(final Callback<LTD> callback){
+    public static void getLtdLeagueOne(final Callback<LTD> callback) {
+        ApiClient.call().ltdLeagueOne(new Callback<LTD>() {
+            @Override
+            public void success(LTD ltd) {
+                callback.success(ltd);
+            }
+
+            @Override
+            public void failure(RetrofitError error, com.androidbelieve.footballlivescore.network.Error myError) {
+                callback.failure(error, myError);
+            }
+        });
+    }
+
+    public static void getLtdC1(final Callback<LTD> callback) {
         ApiClient.call().ltdC1(new Callback<LTD>() {
             @Override
             public void success(LTD ltd) {

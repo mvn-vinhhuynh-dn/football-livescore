@@ -63,6 +63,10 @@ public interface Api {
     @Headers("X-Auth-Token:6c2096fdb0e24c9d93b31bf0ac2060c3")
     void ltdSeria(Callback<LTD> callback);
 
+    @GET("/alpha/soccerseasons/396/fixtures")
+    @Headers("X-Auth-Token:6c2096fdb0e24c9d93b31bf0ac2060c3")
+    void ltdLeagueOne(Callback<LTD> callback);
+
     @GET("/alpha/soccerseasons/405/fixtures")
     @Headers("X-Auth-Token:6c2096fdb0e24c9d93b31bf0ac2060c3")
     void ltdC1(Callback<LTD> callback);
