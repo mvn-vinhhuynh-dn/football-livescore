@@ -4,6 +4,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.androidbelieve.footballlivescore.App;
 import com.androidbelieve.footballlivescore.R;
 import com.androidbelieve.footballlivescore.abstracts.BaseFragment;
 import com.androidbelieve.footballlivescore.acitivities.WebViewsActivity_;
@@ -11,6 +12,8 @@ import com.androidbelieve.footballlivescore.adapter.NewsAdapter;
 import com.androidbelieve.footballlivescore.models.News;
 import com.androidbelieve.footballlivescore.util.DividerItemDecoration;
 import com.androidbelieve.footballlivescore.util.RecyclerItemClickListener;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
@@ -31,7 +34,6 @@ import java.util.List;
 import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 
 /**
- *
  * Created by phulx on 29/10/2015.
  */
 @EFragment(R.layout.news_tabs_fragment)
@@ -48,8 +50,9 @@ public class NewsTabsFragment extends BaseFragment {
     RecyclerView mRecycleNews;
     @ViewById(R.id.progress_dialog_news)
     MaterialProgressBar mProgressDialogNews;
+    private Tracker mTracker;
 
-    public NewsTabsFragment(){
+    public NewsTabsFragment() {
         title = new ArrayList();
         links = new ArrayList();
         description = new ArrayList();
@@ -60,12 +63,14 @@ public class NewsTabsFragment extends BaseFragment {
     }
 
     @AfterViews
-    void afterViews(){
+    void afterViews() {
+        App application = (App) getActivity().getApplication();
+        mTracker = application.getDefaultTracker();
         initViews();
         getData();
     }
 
-    public void initViews(){
+    public void initViews() {
         mRecycleNews.setLayoutManager(new LinearLayoutManager(getActivity()
                 .getBaseContext()));
         mRecycleNews.addItemDecoration(new DividerItemDecoration(getResources()
@@ -73,10 +78,9 @@ public class NewsTabsFragment extends BaseFragment {
         mRecycleNews.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), mRecycleNews, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                if (position==0){
+                if (position == 0) {
                     //Toast.makeText(getActivity(),"chua lam",Toast.LENGTH_SHORT).show();
-                }
-                else {
+                } else {
                     WebViewsActivity_.intent(getActivity())
                             .extra("URL", mArrayListNews.get(position - 1).getLink())
                             .start();
@@ -118,25 +122,25 @@ public class NewsTabsFragment extends BaseFragment {
                         }
 
                     } else if (xpp.getName().equalsIgnoreCase("link")) {
-                        if (insideItem){
+                        if (insideItem) {
                             links.add(xpp.nextText());
                         }
 
-                    } else if (xpp.getName().equalsIgnoreCase("description")){
-                        if (insideItem){
+                    } else if (xpp.getName().equalsIgnoreCase("description")) {
+                        if (insideItem) {
                             description.add(xpp.nextText());
                         }
-                    } else if (xpp.getName().equalsIgnoreCase("pubDate")){
-                        if (insideItem){
+                    } else if (xpp.getName().equalsIgnoreCase("pubDate")) {
+                        if (insideItem) {
                             pubDate.add(xpp.nextText());
                         }
-                    } else if (xpp.getName().equalsIgnoreCase("summaryImg")){
-                        if (insideItem){
+                    } else if (xpp.getName().equalsIgnoreCase("summaryImg")) {
+                        if (insideItem) {
                             summaryImg.add(xpp.nextText());
                         }
                     }
-                } else if(eventType==XmlPullParser.END_TAG && xpp.getName().equalsIgnoreCase("item")){
-                    insideItem=false;
+                } else if (eventType == XmlPullParser.END_TAG && xpp.getName().equalsIgnoreCase("item")) {
+                    insideItem = false;
                 }
                 eventType = xpp.next(); //move to next element
             }
@@ -148,7 +152,7 @@ public class NewsTabsFragment extends BaseFragment {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        for (int i=0; i<links.size();i++){
+        for (int i = 0; i < links.size(); i++) {
             News news = new News();
             news.setTitle(title.get(i).toString());
             news.setLink(links.get(i).toString());
@@ -163,14 +167,14 @@ public class NewsTabsFragment extends BaseFragment {
     @UiThread
     void setUiApplication() {
         mProgressDialogNews.setVisibility(View.INVISIBLE);
-        if (mArrayListNews.size()>5){
-            for (int i=0;i<5;i++){
+        if (mArrayListNews.size() > 5) {
+            for (int i = 0; i < 5; i++) {
                 mArraylistNewsHeader.add(mArrayListNews.get(i));
             }
         } else {
-            mArraylistNewsHeader=mArrayListNews;
+            mArraylistNewsHeader = mArrayListNews;
         }
-        mAdapterNews = new NewsAdapter(getActivity(),mArrayListNews,mArraylistNewsHeader);
+        mAdapterNews = new NewsAdapter(getActivity(), mArrayListNews, mArraylistNewsHeader);
         mRecycleNews.setAdapter(mAdapterNews);
     }
 
@@ -180,5 +184,12 @@ public class NewsTabsFragment extends BaseFragment {
         } catch (IOException e) {
             return null;
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mTracker.setScreenName("News-Screen");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 }

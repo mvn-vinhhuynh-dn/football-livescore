@@ -8,5 +8,5 @@
     <ImageView
         android:layout_width="@dimen/height_100dp"
         android:layout_height="@dimen/height_100dp"
-        android:src="@drawable/img_empty" />
+        android:src="@drawable/ic_empty" />
 </LinearLayout>

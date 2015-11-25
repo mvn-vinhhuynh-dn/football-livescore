@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="ga_sessionTimeout">300</integer>
+
+    <!-- Enable automatic Activity measurement -->
+    <bool name="ga_autoActivityTracking">true</bool>
+
+    <!--  The property id associated with this analytics tracker -->
+    <string name="ga_trackingId">UA-70681437-1</string>
+
+    <string name="ga_sampleFrequency">100.0</string>
+
+    <bool name="ga_reportUncaughtExceptions">true</bool>
+    <screenName name="com.androidbelieve.footballlivescore.acitivities.MatchDetailActivity">Match Detail Screen</screenName>
+    <screenName name="com.androidbelieve.footballlivescore.acitivities.WebViewsActivity">Web View Screen</screenName>
+    <screenName name="com.androidbelieve.footballlivescore.ltd_fragment.BundesligaFragment">LTD-BunDesliga Screen</screenName>
+    <screenName name="com.androidbelieve.footballlivescore.ltd_fragment.LaligaFragment">LTD-Laliga Screen</screenName>
+    <screenName name="com.androidbelieve.footballlivescore.ltd_fragment.Ligue1Fragment">LTD-League One Screen</screenName>
+    <screenName name="com.androidbelieve.footballlivescore.ltd_fragment.PremierLeagueFragment">LTD-Primerleague Screen</screenName>
+    <screenName name="com.androidbelieve.footballlivescore.ltd_fragment.SeriaFragment">LTD-Seria Screen</screenName>
+</resources>

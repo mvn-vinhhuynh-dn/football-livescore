@@ -6,11 +6,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.androidbelieve.footballlivescore.App;
 import com.androidbelieve.footballlivescore.R;
 import com.androidbelieve.footballlivescore.abstracts.BaseFragment;
 import com.androidbelieve.footballlivescore.models.Troll;
 import com.androidbelieve.footballlivescore.util.DividerItemDecoration;
 import com.androidbelieve.footballlivescore.util.RecyclerItemClickListener;
+import com.google.android.gms.analytics.Tracker;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
@@ -46,9 +48,12 @@ public class TrollFragment extends BaseFragment {
     private int visibleItemCount;
     private int totalItemCount;
     private boolean loading = true;
+    private Tracker mTracker;
 
     @AfterViews
     void afterView() {
+        App application = (App) getActivity().getApplication();
+        mTracker = application.getDefaultTracker();
         mArraylist = new ArrayList<>();
         linearLayoutManager = new LinearLayoutManager(getActivity());
         initViews();

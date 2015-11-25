@@ -146,7 +146,7 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnBa
                     changeFragment(trollFragment, true);
                     mToolBar.setTitle("Troll Bóng Đá");
                 }
-                if(menuItem.getItemId() == R.id.nav_item_help){
+                if (menuItem.getItemId() == R.id.nav_item_help) {
                     PaintActivity_.intent(MainActivity.this).start();
                 }
                 return false;
@@ -231,6 +231,11 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnBa
         if (curentFragment instanceof TrollFragment_) {
             ((TrollFragment) curentFragment).onActivityResult(requestCode, resultCode, data);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 }
 

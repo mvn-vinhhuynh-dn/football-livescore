@@ -4,6 +4,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.androidbelieve.footballlivescore.App;
 import com.androidbelieve.footballlivescore.R;
 import com.androidbelieve.footballlivescore.abstracts.BaseFragment;
 import com.androidbelieve.footballlivescore.adapter.BxhLaligaAdapter;
@@ -13,6 +14,8 @@ import com.androidbelieve.footballlivescore.network.apis.AuthApi;
 import com.androidbelieve.footballlivescore.network.core.Callback;
 import com.androidbelieve.footballlivescore.util.CheckTeamNameSetLogo;
 import com.androidbelieve.footballlivescore.util.RecyclerItemClickListener;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EFragment;
@@ -37,9 +40,12 @@ public class BXHLaligaFragment extends BaseFragment {
     private BxhLaligaAdapter mAdapter;
     private ArrayList<BXH> mDatas = new ArrayList<>();
     private ScaleInAnimationAdapter mScaleInAnimationAdapter;
+    private Tracker mTracker;
 
     @AfterViews
     void afterViews() {
+        App application = (App) getActivity().getApplication();
+        mTracker = application.getDefaultTracker();
         initView();
         setAdapter();
         getLaligaRank();
@@ -91,6 +97,12 @@ public class BXHLaligaFragment extends BaseFragment {
 
             }
         }));
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        mTracker.setScreenName("BXH-Laliga-Screen");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 }

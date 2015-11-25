@@ -1,0 +1,45 @@
+{
+  "project_info": {
+    "project_id": "footballlivescorega",
+    "project_number": "143160641293",
+    "name": "FootBallLiveScoreGA"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:143160641293:android:1ce68efb75fac953",
+        "client_id": "android:com.androidbelieve.footballlivescore",
+        "client_type": 1,
+        "android_client_info": {
+          "package_name": "com.androidbelieve.footballlivescore"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [],
+      "services": {
+        "analytics_service": {
+          "status": 2,
+          "analytics_property": {
+            "tracking_id": "UA-70681437-1"
+          }
+        },
+        "cloud_messaging_service": {
+          "status": 1,
+          "apns_config": []
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "google_signin_service": {
+          "status": 1
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "client_info": [],
+  "ARTIFACT_VERSION": "1"
+}

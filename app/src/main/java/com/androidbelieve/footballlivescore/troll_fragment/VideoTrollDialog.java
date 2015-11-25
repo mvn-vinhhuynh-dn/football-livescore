@@ -3,7 +3,10 @@ package com.androidbelieve.footballlivescore.troll_fragment;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.androidbelieve.footballlivescore.App;
 import com.androidbelieve.footballlivescore.R;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
@@ -18,12 +21,16 @@ public class VideoTrollDialog extends YouTubeBaseActivity implements
     private static final int RECOVERY_REQUEST = 1;
     private YouTubePlayerView youTubeView;
     private String url;
+    private Tracker mTracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         setContentView(R.layout.dialog_video_troll);
+
+        App application = (App) getApplication();
+        mTracker = application.getDefaultTracker();
 
         Intent intent = getIntent();
         url = intent.getStringExtra("url");
@@ -66,5 +73,10 @@ public class VideoTrollDialog extends YouTubeBaseActivity implements
 
     }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mTracker.setScreenName("Troll-Video-Screen");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+    }
 }

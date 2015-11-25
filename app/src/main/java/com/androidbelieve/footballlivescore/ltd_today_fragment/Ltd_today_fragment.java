@@ -4,10 +4,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.androidbelieve.footballlivescore.App;
 import com.androidbelieve.footballlivescore.R;
 import com.androidbelieve.footballlivescore.abstracts.BaseFragment;
 import com.androidbelieve.footballlivescore.adapter.LtdTodayAdapter;
 import com.androidbelieve.footballlivescore.models.LtdToday;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersDecoration;
 
 import org.androidannotations.annotations.AfterViews;
@@ -26,12 +29,11 @@ import java.util.ArrayList;
 import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 
 /**
- *
  * Created by phulx on 11/11/2015.
  */
 @EFragment(R.layout.ltd_today_fragment)
 public class Ltd_today_fragment extends BaseFragment {
-
+    private Tracker mTracker;
     private int headerID = 0;
     private String typeID = "";
     private String classCup;
@@ -50,6 +52,8 @@ public class Ltd_today_fragment extends BaseFragment {
 
     @AfterViews
     void afterView() {
+        App application = (App) getActivity().getApplication();
+        mTracker = application.getDefaultTracker();
         configRecycleView();
         setAdapter();
         loadData();
@@ -102,7 +106,7 @@ public class Ltd_today_fragment extends BaseFragment {
         setUiApplication();
     }
 
-    private void getdata(){
+    private void getdata() {
         Elements element = document.select("div.fixtbl").first().select("tbody").first().select("tr");
         classCup = document.select("div.fixtbl").first().select("tbody").first().select("tr.cups").first().toString();
         classAlt = document.select("div.fixtbl").first().select("tbody").first().select("tr.alt").first().toString();
@@ -130,14 +134,14 @@ public class Ltd_today_fragment extends BaseFragment {
                 ltdToday.setLinkAway(BASE_URL + linkAway.substring(0, 9) + "/cau-thu" + linkAway.substring(9, linkAway.length()));
                 if (element.get(i + 1).toString().contains(classOdds.substring(0, 16))) {
 
-                    Elements oddrow = element.get(i+1).select("table.oddrow").first().select("tr");
+                    Elements oddrow = element.get(i + 1).select("table.oddrow").first().select("tr");
                     Elements td_hdp_all = oddrow.get(0).select("td.hdp");
                     Elements td_oue_all = oddrow.get(0).select("td.oue");
                     Elements td_hdp_h1 = oddrow.get(1).select("td.hdp");
                     Elements td_oue_h1 = oddrow.get(1).select("td.oue");
 
-                    LtdToday.Catran catran = ltdToday. new Catran();
-                    LtdToday.Hiep1 hiep1 = ltdToday. new Hiep1();
+                    LtdToday.Catran catran = ltdToday.new Catran();
+                    LtdToday.Hiep1 hiep1 = ltdToday.new Hiep1();
 
                     catran.setHdp_rte(td_hdp_all.get(0).text());
                     catran.setHdp_1(td_hdp_all.get(1).text());
@@ -169,5 +173,10 @@ public class Ltd_today_fragment extends BaseFragment {
         mProgressDialog.setVisibility(View.GONE);
     }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        mTracker.setScreenName("LTD-Today-Screen");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+    }
 }

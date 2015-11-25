@@ -69,5 +69,17 @@
         <item name="android:windowEnterAnimation">@anim/slide_dialog_up</item>
         <item name="android:windowExitAnimation">@anim/slide_dialog_down</item>
     </style>
+    <style name="MyMaterialTheme" parent="MyMaterialTheme.Base">
+
+    </style>
+
+    <style name="MyMaterialTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="colorPrimary">@color/orange</item>
+        <item name="colorPrimaryDark">@color/orange</item>
+        <item name="colorAccent">@color/orange</item>
+    </style>
+
 
 </resources>

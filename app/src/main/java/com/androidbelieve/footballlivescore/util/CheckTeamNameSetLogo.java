@@ -195,7 +195,7 @@ public class CheckTeamNameSetLogo {
                 imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_hamburger));
                 break;
             case "SV Darmstadt 98":
-                imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_darmstadt));
+                imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_darm));
                 break;
             case "Bor. Mönchengladbach":
                 imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_monchengladbach));
@@ -278,7 +278,7 @@ public class CheckTeamNameSetLogo {
                 imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_hellas_verona));
                 break;
             case "Carpi FC":
-                imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_carpi));
+                imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_carp));
                 break;
             case "Bologna FC":
                 imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_bologna));
@@ -383,7 +383,7 @@ public class CheckTeamNameSetLogo {
                 imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_maccabi_tel));
                 break;
             case "Dynamo Kyiv":
-                imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_dynamo_kyiv));
+                imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_kyiv));
                 break;
             case "FC Porto":
                 imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_porto));

@@ -9,12 +9,15 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.androidbelieve.footballlivescore.App;
 import com.androidbelieve.footballlivescore.R;
 import com.androidbelieve.footballlivescore.footballplayerinfor.PlayerInformationDialog;
 import com.androidbelieve.footballlivescore.footballplayerinfor.PlayerInformationDialog_;
 import com.androidbelieve.footballlivescore.ltdfootballclub.ScheduleFcActivity_;
 import com.androidbelieve.footballlivescore.models.FCInformation;
 import com.androidbelieve.footballlivescore.util.CheckTeamNameSetLogo;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.squareup.picasso.Picasso;
 
 import org.androidannotations.annotations.AfterViews;
@@ -84,6 +87,7 @@ public class FootBallClubInformationActivity extends AppCompatActivity implement
     private String stadium = "";
     private String urlImgFc = "";
     private long mLastClickTime;
+    private Tracker mTracker;
 
     @AfterViews
     void afterViews() {
@@ -96,6 +100,9 @@ public class FootBallClubInformationActivity extends AppCompatActivity implement
                 onBackPressed();
             }
         });
+        App application = (App) getApplication();
+        mTracker = application.getDefaultTracker();
+
         initView();
         setAdapter();
         if (myUrl != null && !myUrl.equals("")) {
@@ -195,5 +202,12 @@ public class FootBallClubInformationActivity extends AppCompatActivity implement
         mTvStadium.setText(stadium);
         mAdapter.notifyDataSetChanged();
         mDialog.setVisibility(View.GONE);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mTracker.setScreenName("FC-Information-Screen");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 }

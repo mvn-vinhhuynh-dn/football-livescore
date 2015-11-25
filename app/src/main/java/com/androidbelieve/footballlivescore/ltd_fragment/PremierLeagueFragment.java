@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.androidbelieve.footballlivescore.App;
 import com.androidbelieve.footballlivescore.R;
 import com.androidbelieve.footballlivescore.acitivities.MatchDetailActivity_;
 import com.androidbelieve.footballlivescore.interfaces.ItemStickyClick;
@@ -17,6 +18,9 @@ import com.androidbelieve.footballlivescore.stickydapterPrimer.InitialHeaderAdap
 import com.androidbelieve.footballlivescore.stickydapterPrimer.PrimerAdapter;
 import com.eowise.recyclerview.stickyheaders.StickyHeadersBuilder;
 import com.eowise.recyclerview.stickyheaders.StickyHeadersItemDecoration;
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EFragment;
@@ -46,9 +50,13 @@ public class PremierLeagueFragment extends Fragment implements ItemStickyClick {
 
     @ViewById(R.id.ltd_pri_empty)
     LinearLayout mEmptyLayout;
+    private Tracker mTracker;
 
     @AfterViews
     void afterViews() {
+        App application = (App) getActivity().getApplication();
+        mTracker = application.getDefaultTracker();
+
         initView();
         setAdapter();
         getLTD();
@@ -124,5 +132,19 @@ public class PremierLeagueFragment extends Fragment implements ItemStickyClick {
                 .extra("HOME_NAME", homeName)
                 .extra("DIF_NAME", difName)
                 .start();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mTracker.setScreenName("LTD-PrimerLeague Screen");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        //Stop the analytics tracking
+        GoogleAnalytics.getInstance(getActivity()).reportActivityStop(getActivity());
     }
 }

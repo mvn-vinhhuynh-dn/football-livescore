@@ -4,6 +4,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.androidbelieve.footballlivescore.App;
 import com.androidbelieve.footballlivescore.R;
 import com.androidbelieve.footballlivescore.abstracts.BaseFragment;
 import com.androidbelieve.footballlivescore.models.LTD;
@@ -13,6 +14,8 @@ import com.androidbelieve.footballlivescore.stickydapterPrimer.BigramHeaderAdapt
 import com.androidbelieve.footballlivescore.stickydapterPrimer.InitialHeaderAdapter;
 import com.eowise.recyclerview.stickyheaders.StickyHeadersBuilder;
 import com.eowise.recyclerview.stickyheaders.StickyHeadersItemDecoration;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EFragment;
@@ -39,9 +42,12 @@ public class LtdC1Fragment extends BaseFragment {
     private StickyHeadersItemDecoration overlay;
     private C1Adapter mAdapter;
     private ArrayList<LTD> mDatas = new ArrayList<>();
+    private Tracker mTracker;
 
     @AfterViews
-    void afterView(){
+    void afterView() {
+        App application = (App) getActivity().getApplication();
+        mTracker = application.getDefaultTracker();
         initView();
         setAdapter();
         getLTD();
@@ -98,5 +104,12 @@ public class LtdC1Fragment extends BaseFragment {
             }
         }
         return pos;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mTracker.setScreenName("LTD-C1-Screen");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 }

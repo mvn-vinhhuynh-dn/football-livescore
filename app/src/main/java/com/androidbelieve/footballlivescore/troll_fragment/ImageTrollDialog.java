@@ -10,6 +10,7 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.androidbelieve.footballlivescore.App;
 import com.androidbelieve.footballlivescore.R;
 import com.androidbelieve.footballlivescore.models.Troll;
 import com.facebook.AccessToken;
@@ -24,6 +25,8 @@ import com.facebook.share.Sharer;
 import com.facebook.share.model.SharePhoto;
 import com.facebook.share.model.SharePhotoContent;
 import com.facebook.share.widget.ShareDialog;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.squareup.picasso.Picasso;
 
 import org.androidannotations.annotations.AfterViews;
@@ -53,7 +56,7 @@ public class ImageTrollDialog extends DialogFragment {
     private Bitmap mBitmap;
     @ViewById(R.id.imgDetailsTroll)
     ImageView mImageView;
-
+    private Tracker mTracker;
     @FragmentArg
     Troll mtroll;
     private FacebookCallback<Sharer.Result> shareCallback = new FacebookCallback<Sharer.Result>() {
@@ -112,6 +115,10 @@ public class ImageTrollDialog extends DialogFragment {
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
         getDialog().getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         FacebookSdk.sdkInitialize(getActivity().getApplicationContext());
+
+        App application = (App) getActivity().getApplication();
+        mTracker = application.getDefaultTracker();
+
         mCallbackManager = CallbackManager.Factory.create();
         shareDialog = new ShareDialog(this);
         shareDialog.registerCallback(
@@ -181,5 +188,12 @@ public class ImageTrollDialog extends DialogFragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         mCallbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mTracker.setScreenName("Troll-Image-Screen");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 }

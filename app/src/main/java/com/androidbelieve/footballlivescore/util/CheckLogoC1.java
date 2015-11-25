@@ -89,7 +89,7 @@ public class CheckLogoC1 {
                 imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_porto));
                 break;
             case "Dynamo Kyiv":
-                imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_dynamo_kyiv));
+                imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_kyiv));
                 break;
             case "Chelsea":
                 imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_chelsea));
