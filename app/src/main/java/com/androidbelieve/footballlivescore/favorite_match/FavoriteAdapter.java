@@ -56,7 +56,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
             holder.imgNotification.setImageResource(R.drawable.ic_unnotification);
         }
 
-        String day = getConvertDate(mDatas.get(position).getTimeStart());
+        String day = getConvertTime(mDatas.get(position).getTimeStart());
         try {
             holder.tvTime.setText(getCurentTime(day));
         } catch (ParseException e) {
