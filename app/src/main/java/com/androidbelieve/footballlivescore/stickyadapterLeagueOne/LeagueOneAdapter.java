@@ -11,18 +11,22 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.androidbelieve.footballlivescore.R;
+import com.androidbelieve.footballlivescore.database.FavoriteMatch;
 import com.androidbelieve.footballlivescore.footballclubinfor.FootBallClubInformationActivity_;
 import com.androidbelieve.footballlivescore.interfaces.ItemStickyClick;
 import com.androidbelieve.footballlivescore.interfaces.OnEditListener;
 import com.androidbelieve.footballlivescore.interfaces.OnRemoveListener;
 import com.androidbelieve.footballlivescore.models.LTD;
 import com.androidbelieve.footballlivescore.util.CheckTeamNameSetLogo;
+import com.orm.query.Condition;
+import com.orm.query.Select;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
@@ -34,12 +38,14 @@ public class LeagueOneAdapter extends RecyclerView.Adapter<LeagueOneAdapter.View
     private ItemStickyClick mListener;
     private Context mContext;
     private ArrayList<LTD> mDatas = new ArrayList<>();
+    private List<FavoriteMatch> mFavorites;
 
     public LeagueOneAdapter(Context context, ArrayList<LTD> personDataProvider, ItemStickyClick listener) {
         mListener = listener;
         this.mContext = context;
         this.mDatas = personDataProvider;
         setHasStableIds(true);
+        mFavorites = FavoriteMatch.listAll(FavoriteMatch.class);
     }
 
     @Override
@@ -95,7 +101,7 @@ public class LeagueOneAdapter extends RecyclerView.Adapter<LeagueOneAdapter.View
         viewHolder.imgHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("vinh",mDatas.get(0).getFixtures().get(position).getHomeTeamName());
+                Log.d("vinh", mDatas.get(0).getFixtures().get(position).getHomeTeamName());
                 FootBallClubInformationActivity_.intent(mContext)
                         .extra("NAME_FC", CheckTeamNameSetLogo.getUrl(mContext, mDatas.get(0).getFixtures().get(position).getHomeTeamName()))
                         .extra("NAME", mDatas.get(0).getFixtures().get(position).getHomeTeamName())
@@ -112,6 +118,62 @@ public class LeagueOneAdapter extends RecyclerView.Adapter<LeagueOneAdapter.View
                         .start();
             }
         });
+        checkFavorite(viewHolder, position);
+    }
+
+    private void checkFavorite(final ViewHolder holder, final int position) {
+        if (mDatas.get(0).getFixtures().get(position).isFavorite() || checkFavorite(mDatas.get(0).getFixtures().get(position).getHomeTeamName(),
+                mDatas.get(0).getFixtures().get(position).getAwayTeamName())) {
+            holder.imgFavorite.setImageResource(R.drawable.ic_favorite);
+
+        } else {
+            holder.imgFavorite.setImageResource(R.drawable.ic_unfavorite);
+            mDatas.get(0).getFixtures().get(position).setFavorite(false);
+        }
+
+        holder.imgFavorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isOnDataBase(mDatas.get(0).getFixtures().get(position).getHomeTeamName()
+                        , mDatas.get(0).getFixtures().get(position).getAwayTeamName())) {
+                    holder.imgFavorite.setImageResource(R.drawable.ic_unfavorite);
+                    mDatas.get(0).getFixtures().get(position).setFavorite(false);
+                    Select.from(FavoriteMatch.class)
+                            .where(Condition.prop("HOME_NAME").eq(mDatas.get(0).getFixtures().get(position).getHomeTeamName()),
+                                    Condition.prop("AWAY_NAME").eq(mDatas.get(0).getFixtures().get(position).getAwayTeamName()))
+                            .first().delete();
+
+                } else {
+                    holder.imgFavorite.setImageResource(R.drawable.ic_favorite);
+                    mDatas.get(0).getFixtures().get(position).setFavorite(true);
+                    FavoriteMatch favoriteMatch = new FavoriteMatch(mDatas.get(0).getFixtures().get(position).getHomeTeamName(),
+                            mDatas.get(0).getFixtures().get(position).getAwayTeamName(),
+                            mDatas.get(0).getFixtures().get(position).getDate(), 0, mDatas.get(0).getFixtures().get(position).getDate());
+                    favoriteMatch.save();
+                }
+            }
+        });
+    }
+
+    private boolean checkFavorite(String homeName, String awayName) {
+        if (mFavorites != null) {
+            for (int i = 0; i < mFavorites.size(); i++) {
+                if ((homeName.equals(mFavorites.get(i).getHomeName()) && (awayName.equals(mFavorites.get(i).getAwayName())))) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean isOnDataBase(String homeName, String awayName) {
+        for (int i = 0; i < FavoriteMatch.listAll(FavoriteMatch.class).size(); i++) {
+            if (homeName.equals(FavoriteMatch.listAll(FavoriteMatch.class).get(i).getHomeName())
+                    && awayName.equals(FavoriteMatch.listAll(FavoriteMatch.class).get(i).getAwayName())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -129,17 +191,6 @@ public class LeagueOneAdapter extends RecyclerView.Adapter<LeagueOneAdapter.View
 
     @Override
     public void onEdit(final int position) {
-//        final EditText edit = new EditText(mContext);
-//        edit.setTextColor(Color.BLACK);
-//        edit.setText(personDataProvider.getItems().get(position));
-//        new AlertDialog.Builder(mContext).setTitle(R.string.edit).setView(edit).setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                String name = edit.getText().toString();
-//                personDataProvider.update(position, name);
-//                notifyItemChanged(position);
-//            }
-//        }).create().show();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -147,7 +198,7 @@ public class LeagueOneAdapter extends RecyclerView.Adapter<LeagueOneAdapter.View
         private TextView tvHomeName;
         private TextView tvAgainstName;
         private TextView tvGoals;
-
+        private ImageView imgFavorite;
         private ImageView imgHome;
         private ImageView imgAgainst;
 
@@ -158,7 +209,7 @@ public class LeagueOneAdapter extends RecyclerView.Adapter<LeagueOneAdapter.View
             tvHomeName = (TextView) itemView.findViewById(R.id.home_name);
             tvAgainstName = (TextView) itemView.findViewById(R.id.against_name);
             tvGoals = (TextView) itemView.findViewById(R.id.tv_goals);
-
+            imgFavorite = (ImageView) itemView.findViewById(R.id.img_favorite);
             imgHome = (ImageView) itemView.findViewById(R.id.home_icon);
             imgAgainst = (ImageView) itemView.findViewById(R.id.against_icon);
             llDetails = (LinearLayout) itemView.findViewById(R.id.llDetails);

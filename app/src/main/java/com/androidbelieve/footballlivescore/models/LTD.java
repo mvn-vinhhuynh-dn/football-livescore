@@ -50,6 +50,8 @@ public class LTD {
          * homeTeam : {"href":"http://api.football-data.org/alpha/teams/66"}
          * awayTeam : {"href":"http://api.football-data.org/alpha/teams/73"}
          */
+        private boolean isFavorite = false;
+
         @SerializedName("_links")
         private LinksEntity _links;
         private String date;

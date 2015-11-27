@@ -152,14 +152,16 @@ public class NewsTabsFragment extends BaseFragment {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        for (int i = 0; i < links.size(); i++) {
-            News news = new News();
-            news.setTitle(title.get(i).toString());
-            news.setLink(links.get(i).toString());
-            news.setDescription(description.get(i).toString());
-            news.setPubDate(pubDate.get(i).toString());
-            news.setSummaryImg(summaryImg.get(i).toString());
-            mArrayListNews.add(news);
+        if (links != null && links.size() > 0) {
+            for (int i = 0; i < links.size(); i++) {
+                News news = new News();
+                news.setTitle(title.get(i).toString());
+                news.setLink(links.get(i).toString());
+                news.setDescription(description.get(i).toString());
+                news.setPubDate(pubDate.get(i).toString());
+                news.setSummaryImg(summaryImg.get(i).toString());
+                mArrayListNews.add(news);
+            }
         }
         setUiApplication();
     }

@@ -37,9 +37,9 @@
 
     <group android:id="@+id/group_settings_id">
 
-        <item android:id="@+id/nav_item_help"
-            android:icon="@drawable/settings"
-            android:title="Settings" />
+        <item android:id="@+id/nav_item_favorite"
+            android:icon="@drawable/ic_favorite_menu"
+            android:title="Favorite Match" />
         <item
             android:icon="@drawable/help"
             android:title="Help" />

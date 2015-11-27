@@ -14,17 +14,25 @@
         android:paddingRight="@dimen/margin_5"
         android:weightSum="7">
 
+        <ImageView
+            android:id="@+id/img_notification_favorite"
+            android:layout_width="@dimen/height_20dp"
+            android:layout_height="@dimen/height_20dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/margin_15"
+            android:src="@drawable/ic_notification" />
         <LinearLayout
-            android:id="@+id/llHome"
+            android:id="@+id/llHome_favorite"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/margin_5"
             android:layout_weight="3"
             android:gravity="center_vertical"
             android:weightSum="3">
 
             <TextView
-                android:id="@+id/home_name"
+                android:id="@+id/home_name_favorite"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -33,7 +41,7 @@
                 android:text="Chealse" />
 
             <ImageView
-                android:id="@+id/home_icon"
+                android:id="@+id/home_icon_favorite"
                 android:layout_width="0dp"
                 android:layout_height="30dp"
                 android:layout_weight="0.7"
@@ -41,14 +49,14 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/llDetails"
+            android:id="@+id/llDetails_favorite"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tv_goals"
+                android:id="@+id/tv_goals_favorite"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
@@ -56,7 +64,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/llAgainst"
+            android:id="@+id/llAgainst_favorite"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
@@ -66,14 +74,14 @@
             android:weightSum="3">
 
             <ImageView
-                android:id="@+id/against_icon"
+                android:id="@+id/against_icon_favorite"
                 android:layout_width="0dp"
                 android:layout_height="30dp"
                 android:layout_weight="0.7"
                 android:src="@drawable/ic_manchester_united" />
 
             <TextView
-                android:id="@+id/against_name"
+                android:id="@+id/against_name_favorite"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -81,12 +89,5 @@
                 android:gravity="center"
                 android:text="Manchester Uniteddddddddddd" />
         </LinearLayout>
-
-        <ImageView
-            android:id="@+id/img_favorite"
-            android:layout_width="@dimen/height_20dp"
-            android:layout_height="@dimen/height_20dp"
-            android:layout_gravity="center"
-            android:src="@drawable/ic_unfavorite" />
     </LinearLayout>
 </LinearLayout>

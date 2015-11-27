@@ -56,4 +56,5 @@
     <dimen name="height_55dp">55dp</dimen>
     <dimen name="height_200dp">200dp</dimen>
     <dimen name="height_180dp">180dp</dimen>
+    <dimen name="margin_15">15dp</dimen>
 </resources>

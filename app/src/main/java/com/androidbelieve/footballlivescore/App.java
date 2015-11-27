@@ -1,6 +1,5 @@
 package com.androidbelieve.footballlivescore;
 
-import android.app.Application;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 
@@ -9,11 +8,12 @@ import com.androidbelieve.footballlivescore.network.core.ApiClient;
 import com.androidbelieve.footballlivescore.network.core.ApiConfig;
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.Tracker;
+import com.orm.SugarApp;
 
 /**
  * Created by phulx on 23/10/2015.
  */
-public class App extends Application {
+public class App extends SugarApp {
     private static App instance = null;
     private Tracker mTracker;
 
