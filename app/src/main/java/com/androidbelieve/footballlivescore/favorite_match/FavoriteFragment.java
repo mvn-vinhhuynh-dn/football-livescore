@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -19,9 +18,15 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 /**
  * Copyright © 2015 AsianTech inc.
@@ -79,12 +84,14 @@ public class FavoriteFragment extends Fragment implements FavoriteAdapter.OnAlar
         }
     }
 
-    private void turnOnAlarm(String time, String title, int id) {
-        // Set the alarm to start at hh:mm.
+    private void turnOnAlarm(String time, String title, int id) throws ParseException {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, 15);
-        calendar.set(Calendar.MINUTE, 22);
+        calendar.set(Calendar.YEAR, Integer.parseInt(getCurentTime(time).substring(0, 4)));
+        calendar.set(Calendar.MONTH, Integer.parseInt(getCurentTime(time).substring(5, 7)));
+        calendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(getCurentTime(time).substring(8, 10)));
+        calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(getCurentTime(time).substring(11, 13)));
+        calendar.set(Calendar.MINUTE, Integer.parseInt(getCurentTime(time).substring(14, 16)));
 
         Intent notifications = new Intent(getActivity().getApplicationContext(), NotificationMessage.class);
         notifications.putExtra("MATCH_TITLE", title);
@@ -92,7 +99,6 @@ public class FavoriteFragment extends Fragment implements FavoriteAdapter.OnAlar
         PendingIntent pi = PendingIntent.getBroadcast(getActivity(), id, notifications, PendingIntent.FLAG_CANCEL_CURRENT);
         AlarmManager am = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
         am.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pi);
-        Log.d("Vvvv", "on id = " + id);
     }
 
     private void turnOffAlarm(int id) {
@@ -102,7 +108,6 @@ public class FavoriteFragment extends Fragment implements FavoriteAdapter.OnAlar
         if (alarmMgr != null) {
             alarmMgr.cancel(alarmIntent);
             alarmIntent.cancel();
-            Log.d("Vvvv", "off id = " + id);
         }
     }
 
@@ -115,8 +120,43 @@ public class FavoriteFragment extends Fragment implements FavoriteAdapter.OnAlar
         } else {
             matchLists.get(pos).setIsNotification(1);
             changeDataBase(matchLists.get(pos).getId(), true);
-            turnOnAlarm(matchLists.get(pos).getTimeStart(), matchLists.get(pos).getHomeName() + " - " + matchLists.get(pos).getAwayName(), matchLists.get(pos).getId().intValue());
+            try {
+                turnOnAlarm(matchLists.get(pos).getTimeStart(), matchLists.get(pos).getHomeName() + " - " + matchLists.get(pos).getAwayName(), matchLists.get(pos).getId().intValue());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
         mAdapter.notifyDataSetChanged();
+    }
+
+    public String getConvertDate(String adate) {
+        DateFormat form = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        Date date = null;
+        try {
+            date = form.parse(adate);
+        } catch (ParseException e) {
+
+            e.printStackTrace();
+        }
+        SimpleDateFormat postFormater = new SimpleDateFormat("yyyy:MM:dd:HH:mm", Locale.getDefault());
+        String newDateStr = postFormater.format(date);
+        return newDateStr;
+    }
+
+    public String getCurentTime(String time) throws ParseException {
+        // From TimeZone Etc/UTC
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        TimeZone tz = TimeZone.getTimeZone("Etc/UTC");
+        formatter.setTimeZone(tz);
+        Date date = formatter.parse(time);
+
+
+        // To TimeZone America/New_York
+        SimpleDateFormat sdfAmerica = new SimpleDateFormat("yyyy:MM:dd:HH:mm");
+        TimeZone tzInAmerica = TimeZone.getTimeZone("Asia/Ho_Chi_Minh");
+        sdfAmerica.setTimeZone(tzInAmerica);
+
+        String sDateInAmerica = sdfAmerica.format(date); // Convert to String first
+        return sDateInAmerica;
     }
 }

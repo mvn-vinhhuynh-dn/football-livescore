@@ -235,6 +235,7 @@ public class PrimerAdapter extends RecyclerView.Adapter<PrimerAdapter.ViewHolder
     public String getConvertDate(String adate) {
         DateFormat form = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
         TimeZone tzInAmerica = TimeZone.getTimeZone("Europe/London");
+        form.setTimeZone(tzInAmerica);
         Date date = null;
         try {
             date = form.parse(adate);

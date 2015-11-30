@@ -7,12 +7,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
-import android.media.MediaPlayer;
-import android.media.Ringtone;
-import android.media.RingtoneManager;
-import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
 
 import com.androidbelieve.footballlivescore.R;
 
@@ -27,10 +22,8 @@ public class NotificationMessage extends BroadcastReceiver {
         if (arg1 != null && arg1.hasExtra("MATCH_TITLE")) {
             String title = arg1.getStringExtra("MATCH_TITLE");
             showNotification(context, title);
-            ring(context);
         } else {
             showNotification(context, "Match Start!!!");
-            ring(context);
         }
     }
 
@@ -39,7 +32,6 @@ public class NotificationMessage extends BroadcastReceiver {
                 new Intent(context, NotificationMessage.class), 0);
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(context)
-                        .setSmallIcon(R.drawable.ic_chelsea)
                         .setLargeIcon(BitmapFactory.decodeResource(context.getResources(),
                                 R.drawable.ic_launcher))
                         .setContentTitle("FootBall match will start after 5 mins!!!")
@@ -49,20 +41,5 @@ public class NotificationMessage extends BroadcastReceiver {
         mBuilder.setAutoCancel(true);
         NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         mNotificationManager.notify(1, mBuilder.build());
-        //Ring tone
-        try {
-            Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-            Ringtone r = RingtoneManager.getRingtone(context.getApplicationContext(), notification);
-            r.play();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void ring(Context context) {
-        Log.d("Vvvv", " ringgg");
-        Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        MediaPlayer mp = MediaPlayer.create(context, notification);
-        mp.start();
     }
 }
