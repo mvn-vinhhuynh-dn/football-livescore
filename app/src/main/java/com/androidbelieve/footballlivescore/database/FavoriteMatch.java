@@ -10,11 +10,12 @@ import lombok.Data;
  */
 @Data
 public class FavoriteMatch extends SugarRecord<FavoriteMatch> {
-    String homeName;
-    String awayName;
-    String timeStart;
-    int isNotification;
-    String headerId;
+    public String homeName;
+    public String awayName;
+    public String timeStart;
+    public int isNotification;
+    public String headerId;
+
     public FavoriteMatch() {
     }
 

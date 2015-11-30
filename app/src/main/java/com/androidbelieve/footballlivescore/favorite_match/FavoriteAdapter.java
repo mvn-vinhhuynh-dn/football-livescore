@@ -28,12 +28,13 @@ import java.util.TimeZone;
 public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHolder> implements StickyRecyclerHeadersAdapter<FavoriteAdapter.VhFavoriteAdapter> {
     private Context mContext;
     private List<FavoriteMatch> mDatas;
+    private OnAlarmNotification mListener;
 
-    public FavoriteAdapter(Context context, List<FavoriteMatch> favoriteMatchList) {
+    public FavoriteAdapter(Context context, List<FavoriteMatch> favoriteMatchList, OnAlarmNotification onAlarmNotification) {
         this.mContext = context;
         this.mDatas = favoriteMatchList;
+        this.mListener = onAlarmNotification;
     }
-
 
     @Override
     public FavoriteAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -43,7 +44,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(FavoriteAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(final FavoriteAdapter.ViewHolder holder, final int position) {
         CheckTeamNameSetLogo.setLogo(mContext, holder.imgHome, mDatas.get(position).getHomeName());
         CheckTeamNameSetLogo.setLogo(mContext, holder.imgAgainst, mDatas.get(position).getAwayName());
 
@@ -62,6 +63,12 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        holder.imgNotification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.onAlarmSetup(position);
+            }
+        });
     }
 
     @Override
@@ -182,5 +189,9 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
 
         String sDateInAmerica = sdfAmerica.format(date); // Convert to String first
         return sDateInAmerica;
+    }
+
+    public interface OnAlarmNotification {
+        void onAlarmSetup(int pos);
     }
 }

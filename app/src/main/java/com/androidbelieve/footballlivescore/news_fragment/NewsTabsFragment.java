@@ -159,6 +159,7 @@ public class NewsTabsFragment extends BaseFragment {
                 news.setLink(links.get(i).toString());
                 news.setDescription(description.get(i).toString());
                 news.setPubDate(pubDate.get(i).toString());
+
                 news.setSummaryImg(summaryImg.get(i).toString());
                 mArrayListNews.add(news);
             }
