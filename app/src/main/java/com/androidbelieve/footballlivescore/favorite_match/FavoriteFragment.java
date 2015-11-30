@@ -34,6 +34,7 @@ import java.util.TimeZone;
  */
 @EFragment(R.layout.fragment_favorite)
 public class FavoriteFragment extends Fragment implements FavoriteAdapter.OnAlarmNotification {
+    public static final String MATCH_TITLE = "MATCH_TITLE";
     @ViewById(R.id.recycle_favorite)
     RecyclerView mRecycleView;
 
@@ -94,7 +95,7 @@ public class FavoriteFragment extends Fragment implements FavoriteAdapter.OnAlar
         calendar.set(Calendar.MINUTE, Integer.parseInt(getCurentTime(time).substring(14, 16)));
 
         Intent notifications = new Intent(getActivity().getApplicationContext(), NotificationMessage.class);
-        notifications.putExtra("MATCH_TITLE", title);
+        notifications.putExtra(MATCH_TITLE, title);
         //This is alarm manager
         PendingIntent pi = PendingIntent.getBroadcast(getActivity(), id, notifications, PendingIntent.FLAG_CANCEL_CURRENT);
         AlarmManager am = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);

@@ -19,8 +19,8 @@ public class NotificationMessage extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent arg1) {
-        if (arg1 != null && arg1.hasExtra("MATCH_TITLE")) {
-            String title = arg1.getStringExtra("MATCH_TITLE");
+        if (arg1 != null && arg1.hasExtra(FavoriteFragment.MATCH_TITLE)) {
+            String title = arg1.getStringExtra(FavoriteFragment.MATCH_TITLE);
             showNotification(context, title);
         } else {
             showNotification(context, "Match Start!!!");
