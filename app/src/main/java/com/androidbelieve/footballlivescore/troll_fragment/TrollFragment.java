@@ -69,7 +69,6 @@ public class TrollFragment extends BaseFragment {
         mAdapter = new TrollAdapter(getActivity(), mArraylist);
         mRecycleTroll.setAdapter(mAdapter);
         loadmore();
-
         mRecycleTroll.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), mRecycleTroll, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {

@@ -3,6 +3,7 @@ package com.androidbelieve.footballlivescore.ltd_today_fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
 import com.androidbelieve.footballlivescore.App;
 import com.androidbelieve.footballlivescore.R;
@@ -29,10 +30,11 @@ import java.util.ArrayList;
 import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 
 /**
- * Created by phulx on 11/11/2015.
+ * Copyright © 2015 AsianTech inc.
+ * Created by VinhHlb on 12/3/15.
  */
-@EFragment(R.layout.ltd_today_fragment)
-public class Ltd_today_fragment extends BaseFragment {
+@EFragment(R.layout.kq_today_fragment)
+public class Kq_today_fragment extends BaseFragment {
     private Tracker mTracker;
     private int headerID = 0;
     private String typeID = "";
@@ -44,10 +46,12 @@ public class Ltd_today_fragment extends BaseFragment {
     private ArrayList<LtdToday> mArraylist = new ArrayList<>();
     private LtdTodayAdapter mAdapter;
     private final String BASE_URL = "http://livescore.bongdaplus.vn";
-    @ViewById(R.id.recycle_ltd_today)
-    RecyclerView mRecycleLtdToday;
-    @ViewById(R.id.process_dialog_ltd_today)
+    @ViewById(R.id.recycle_kq_today)
+    RecyclerView mRecycleKqToday;
+    @ViewById(R.id.process_dialog_kq_today)
     MaterialProgressBar mProgressDialog;
+    @ViewById(R.id.tvFail)
+    TextView mTvFail;
 
 
     @AfterViews
@@ -61,15 +65,15 @@ public class Ltd_today_fragment extends BaseFragment {
 
     private void setAdapter() {
         mAdapter = new LtdTodayAdapter(getActivity(), mArraylist);
-        mRecycleLtdToday.setAdapter(mAdapter);
+        mRecycleKqToday.setAdapter(mAdapter);
         //Add header sticky
         StickyRecyclerHeadersDecoration headersDecoration = new StickyRecyclerHeadersDecoration(mAdapter);
-        mRecycleLtdToday.addItemDecoration(headersDecoration);
+        mRecycleKqToday.addItemDecoration(headersDecoration);
     }
 
     private void configRecycleView() {
         //Config recycleView
-        mRecycleLtdToday.setLayoutManager(new LinearLayoutManager(getActivity()
+        mRecycleKqToday.setLayoutManager(new LinearLayoutManager(getActivity()
                 .getBaseContext()));
     }
 
@@ -103,7 +107,7 @@ public class Ltd_today_fragment extends BaseFragment {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        setUiApplication();
+            setUiApplication();
     }
 
     private void getdata() {
@@ -118,7 +122,7 @@ public class Ltd_today_fragment extends BaseFragment {
             } else if ((element.get(i).toString().contains(classAlt.substring(0, 15))) || (element.get(i).toString().contains("<tr xcup="))) {
                 LtdToday ltdToday = new LtdToday();
 
-                if (Integer.valueOf(element.get(i).attr("xstate")) == 1) {
+                if (Integer.valueOf(element.get(i).attr("xstate")) == 3) {
                     ltdToday.setHeaderId(headerID);
                     ltdToday.setTypeId(typeID);
                     ltdToday.setDate(element.get(i).select("td.cal").first().text());
@@ -177,7 +181,7 @@ public class Ltd_today_fragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        mTracker.setScreenName("LTD-Today-Screen");
+        mTracker.setScreenName("KQ-Today-Screen");
         mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 }

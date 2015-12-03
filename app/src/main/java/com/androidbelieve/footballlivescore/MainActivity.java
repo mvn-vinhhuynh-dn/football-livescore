@@ -27,8 +27,8 @@ import com.androidbelieve.footballlivescore.favorite_match.FavoriteFragment;
 import com.androidbelieve.footballlivescore.favorite_match.FavoriteFragment_;
 import com.androidbelieve.footballlivescore.ltd_fragment.LTDTabFragment;
 import com.androidbelieve.footballlivescore.ltd_fragment.LTDTabFragment_;
-import com.androidbelieve.footballlivescore.ltd_today_fragment.Ltd_today_fragment;
-import com.androidbelieve.footballlivescore.ltd_today_fragment.Ltd_today_fragment_;
+import com.androidbelieve.footballlivescore.ltd_today_fragment.LtdTodayTabFragment;
+import com.androidbelieve.footballlivescore.ltd_today_fragment.LtdTodayTabFragment_;
 import com.androidbelieve.footballlivescore.news_fragment.NewsTabsFragment;
 import com.androidbelieve.footballlivescore.news_fragment.NewsTabsFragment_;
 import com.androidbelieve.footballlivescore.troll_fragment.TrollFragment;
@@ -45,6 +45,7 @@ import java.util.List;
 
 @EActivity(R.layout.activity_main)
 public class MainActivity extends AppCompatActivity implements BaseFragment.OnBaseFragmentListener, View.OnTouchListener {
+    private static final String TAG = "MainActivity";
     @ViewById(R.id.drawerLayout)
     DrawerLayout mDrawerLayout;
 
@@ -84,10 +85,11 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnBa
         } else {
             showAlertDialog(this, "No Conection");
         }
+
 //        setDrawerLayoutMargin();
     }
 
-//    private void setDrawerLayoutMargin() {
+    //    private void setDrawerLayoutMargin() {
 //        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
 //                LinearLayout.LayoutParams.MATCH_PARENT,
 //                LinearLayout.LayoutParams.MATCH_PARENT);
@@ -101,8 +103,8 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnBa
 //    }
 
     private void intViews() {
-        Ltd_today_fragment ltd_today_fragment = new Ltd_today_fragment_();
-        changeFragment(ltd_today_fragment, true);
+        LtdTodayTabFragment ltdTodayTabFragment = new LtdTodayTabFragment_();
+        changeFragment(ltdTodayTabFragment, true);
         mToolBar.setTitle("Lịch Thi Đấu Hôm Nay");
         mImgBall.setOnTouchListener(this);
     }
@@ -113,8 +115,8 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnBa
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 mDrawerLayout.closeDrawers();
                 if (menuItem.getItemId() == R.id.nav_item_ltdToday) {
-                    Ltd_today_fragment ltd_today_fragment = new Ltd_today_fragment_();
-                    changeFragment(ltd_today_fragment, true);
+                    LtdTodayTabFragment ltdTodayTabFragment = new LtdTodayTabFragment_();
+                    changeFragment(ltdTodayTabFragment, true);
                     mToolBar.setTitle("Lịch Thi Đấu Hôm Nay");
                 }
 
