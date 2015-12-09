@@ -8,7 +8,7 @@ import android.widget.TextView;
 import com.androidbelieve.footballlivescore.App;
 import com.androidbelieve.footballlivescore.R;
 import com.androidbelieve.footballlivescore.abstracts.BaseFragment;
-import com.androidbelieve.footballlivescore.adapter.LtdTodayAdapter;
+import com.androidbelieve.footballlivescore.adapter.KqTodayAdapter;
 import com.androidbelieve.footballlivescore.models.LtdToday;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
@@ -22,6 +22,7 @@ import org.androidannotations.annotations.ViewById;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
@@ -44,7 +45,7 @@ public class Kq_today_fragment extends BaseFragment {
     private Document document;
 
     private ArrayList<LtdToday> mArraylist = new ArrayList<>();
-    private LtdTodayAdapter mAdapter;
+    private KqTodayAdapter mAdapter;
     private final String BASE_URL = "http://livescore.bongdaplus.vn";
     @ViewById(R.id.recycle_kq_today)
     RecyclerView mRecycleKqToday;
@@ -64,7 +65,7 @@ public class Kq_today_fragment extends BaseFragment {
     }
 
     private void setAdapter() {
-        mAdapter = new LtdTodayAdapter(getActivity(), mArraylist);
+        mAdapter = new KqTodayAdapter(getActivity(), mArraylist);
         mRecycleKqToday.setAdapter(mAdapter);
         //Add header sticky
         StickyRecyclerHeadersDecoration headersDecoration = new StickyRecyclerHeadersDecoration(mAdapter);
@@ -107,66 +108,47 @@ public class Kq_today_fragment extends BaseFragment {
         } catch (IOException e) {
             e.printStackTrace();
         }
-            setUiApplication();
+        setUiApplication();
     }
 
     private void getdata() {
-        Elements element = document.select("div.fixtbl").first().select("tbody").first().select("tr");
-        classCup = document.select("div.fixtbl").first().select("tbody").first().select("tr.cups").first().toString();
-        classAlt = document.select("div.fixtbl").first().select("tbody").first().select("tr.alt").first().toString();
-        classOdds = document.select("div.fixtbl").first().select("tbody").first().select("tr.odds").first().toString();
-        for (int i = 1; i < element.size(); i++) {
-            if (element.get(i).toString().contains(classCup.substring(0, 16))) {
-                headerID++;
-                typeID = element.get(i).text();
-            } else if ((element.get(i).toString().contains(classAlt.substring(0, 15))) || (element.get(i).toString().contains("<tr xcup="))) {
-                LtdToday ltdToday = new LtdToday();
+        Element element = document.select("div.fixtbl").first().select("tbody").first();
+        Elements tr = element.select("tr");
 
-                if (Integer.valueOf(element.get(i).attr("xstate")) == 3) {
-                    ltdToday.setHeaderId(headerID);
-                    ltdToday.setTypeId(typeID);
-                    ltdToday.setDate(element.get(i).select("td.cal").first().text());
-                    ltdToday.setHomeName(element.get(i).select("td.hme").first().text());
-                    String linkHome = element.get(i).select("td.hme").first().select("a").first().attr("href");
-                    ltdToday.setLinkHome(BASE_URL + linkHome.substring(0, 9) + "/cau-thu" + linkHome.substring(9, linkHome.length()));
-                    ltdToday.setImgHome(element.get(i).select("img").first().attr("src"));
-                    ltdToday.setTime(element.get(i).select("td.sco").text());
-                    ltdToday.setLinkSoccer(BASE_URL + element.get(i).select("td.sco").select("a").first().attr("href"));
-                    Elements aways = element.get(i).select("td.awy");
-                    ltdToday.setImgAway(aways.get(0).select("img").first().attr("src"));
-                    ltdToday.setAwayName(aways.get(1).select("a").first().text());
-                    String linkAway = aways.get(1).select("a").first().attr("href");
-                    ltdToday.setLinkAway(BASE_URL + linkAway.substring(0, 9) + "/cau-thu" + linkAway.substring(9, linkAway.length()));
-                    if (element.get(i + 1).toString().contains(classOdds.substring(0, 16))) {
+        for (int i = 1; i < tr.size(); i++) {
+            if (!tr.get(i).attr("xcup").equals("")) {
 
-                        Elements oddrow = element.get(i + 1).select("table.oddrow").first().select("tr");
-                        Elements td_hdp_all = oddrow.get(0).select("td.hdp");
-                        Elements td_oue_all = oddrow.get(0).select("td.oue");
-                        Elements td_hdp_h1 = oddrow.get(1).select("td.hdp");
-                        Elements td_oue_h1 = oddrow.get(1).select("td.oue");
+                if (Integer.valueOf(tr.get(i).attr("xcup")) == 10
+                        || Integer.valueOf(tr.get(i).attr("xcup")) == 18
+                        || Integer.valueOf(tr.get(i).attr("xcup")) == 8
+                        || Integer.valueOf(tr.get(i).attr("xcup")) == 9
+                        || Integer.valueOf(tr.get(i).attr("xcup")) == 13
+                        || Integer.valueOf(tr.get(i).attr("xcup")) == 7
+                        || Integer.valueOf(tr.get(i).attr("xcup")) == 16) {
 
-                        LtdToday.Catran catran = ltdToday.new Catran();
-                        LtdToday.Hiep1 hiep1 = ltdToday.new Hiep1();
+                    if (tr.get(i).attr("class").equals("cups")) {
+                        headerID++;
+                        typeID = tr.get(i).text();
+                    } else if (tr.get(i).attr("xstate").equals("3")) {
+                        LtdToday ltdToday = new LtdToday();
 
-                        catran.setHdp_rte(td_hdp_all.get(0).text());
-                        catran.setHdp_1(td_hdp_all.get(1).text());
-                        catran.setHdp_2(td_hdp_all.get(2).text());
-                        catran.setOue_rte(td_oue_all.get(0).text());
-                        catran.setOue_1(td_oue_all.get(1).text());
-                        catran.setOue_2(td_oue_all.get(2).text());
+                        ltdToday.setHeaderId(headerID);
+                        ltdToday.setTypeId(typeID);
+                        ltdToday.setDate(tr.get(i).select("td.cal").first().text());
+                        ltdToday.setHomeName(tr.get(i).select("td.hme").first().text());
+                        String linkHome = tr.get(i).select("td.hme").first().select("a").first().attr("href");
+                        ltdToday.setLinkHome(BASE_URL + linkHome.substring(0, 9) + "/cau-thu" + linkHome.substring(9, linkHome.length()));
+                        ltdToday.setImgHome(tr.get(i).select("img").first().attr("src"));
+                        ltdToday.setTime(tr.get(i).select("td.sco").text());
+                        ltdToday.setLinkSoccer(BASE_URL + tr.get(i).select("td.sco").select("a").first().attr("href"));
+                        Elements aways = tr.get(i).select("td.awy");
+                        ltdToday.setImgAway(aways.get(0).select("img").first().attr("src"));
+                        ltdToday.setAwayName(aways.get(1).select("a").first().text());
+                        String linkAway = aways.get(1).select("a").first().attr("href");
+                        ltdToday.setLinkAway(BASE_URL + linkAway.substring(0, 9) + "/cau-thu" + linkAway.substring(9, linkAway.length()));
 
-                        hiep1.setHdp_rte(td_hdp_h1.get(0).text());
-                        hiep1.setHdp_1(td_hdp_h1.get(1).text());
-                        hiep1.setHdp_2(td_hdp_h1.get(2).text());
-                        hiep1.setOue_rte(td_oue_h1.get(0).text());
-                        hiep1.setOue_1(td_oue_h1.get(1).text());
-                        hiep1.setOue_2(td_oue_h1.get(2).text());
-
-                        ltdToday.setCatran(catran);
-                        ltdToday.setHiep1(hiep1);
-
+                        mArraylist.add(ltdToday);
                     }
-                    mArraylist.add(ltdToday);
                 }
             }
         }
@@ -174,6 +156,11 @@ public class Kq_today_fragment extends BaseFragment {
 
     @UiThread
     public void setUiApplication() {
+        if (mArraylist.size() == 0) {
+            mTvFail.setVisibility(View.VISIBLE);
+        } else {
+            mTvFail.setVisibility(View.GONE);
+        }
         mAdapter.notifyDataSetChanged();
         mProgressDialog.setVisibility(View.GONE);
     }

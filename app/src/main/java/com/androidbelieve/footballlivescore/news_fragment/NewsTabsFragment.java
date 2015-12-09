@@ -2,6 +2,7 @@ package com.androidbelieve.footballlivescore.news_fragment;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 import com.androidbelieve.footballlivescore.App;
@@ -152,7 +153,8 @@ public class NewsTabsFragment extends BaseFragment {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if (links != null && links.size() > 0) {
+        Log.d("tttttt","affdsa" + description.get(0).toString());
+        if (links != null && links.size() > 0 && title.size() > 0 && description.size() >0 && pubDate.size() > 0 && summaryImg.size() > 0 ) {
             for (int i = 0; i < links.size(); i++) {
                 News news = new News();
                 news.setTitle(title.get(i).toString());

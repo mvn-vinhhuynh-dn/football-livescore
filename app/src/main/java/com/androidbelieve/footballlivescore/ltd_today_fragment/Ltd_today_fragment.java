@@ -1,8 +1,11 @@
 package com.androidbelieve.footballlivescore.ltd_today_fragment;
 
+import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
 import com.androidbelieve.footballlivescore.App;
 import com.androidbelieve.footballlivescore.R;
@@ -21,6 +24,7 @@ import org.androidannotations.annotations.ViewById;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
@@ -36,10 +40,8 @@ public class Ltd_today_fragment extends BaseFragment {
     private Tracker mTracker;
     private int headerID = 0;
     private String typeID = "";
-    private String classCup;
-    private String classAlt;
-    private String classOdds;
     private Document document;
+    private boolean checkprocess = true;
 
     private ArrayList<LtdToday> mArraylist = new ArrayList<>();
     private LtdTodayAdapter mAdapter;
@@ -48,6 +50,10 @@ public class Ltd_today_fragment extends BaseFragment {
     RecyclerView mRecycleLtdToday;
     @ViewById(R.id.process_dialog_ltd_today)
     MaterialProgressBar mProgressDialog;
+    @ViewById(R.id.RefreshLtdToday)
+    SwipeRefreshLayout mRefreshLayout;
+    @ViewById(R.id.tvLtdFail)
+    TextView mTvLtdFail;
 
 
     @AfterViews
@@ -57,6 +63,25 @@ public class Ltd_today_fragment extends BaseFragment {
         configRecycleView();
         setAdapter();
         loadData();
+
+        mRefreshLayout.setEnabled(true);
+        mRefreshLayout.setColorSchemeResources(R.color.orange);
+        mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        checkprocess = false;
+                        loadData();
+                        mRefreshLayout.setRefreshing(false);
+                    }
+
+                }, 4000);
+
+            }
+        });
     }
 
     private void setAdapter() {
@@ -75,7 +100,9 @@ public class Ltd_today_fragment extends BaseFragment {
 
     @Background
     public void loadData() {
-        mProgressDialog.setVisibility(View.VISIBLE);
+        if (checkprocess) {
+            mProgressDialog.setVisibility(View.VISIBLE);
+        }
 
         Connection con = Jsoup.connect(BASE_URL)
                 .userAgent("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.21 (KHTML, like Gecko) Chrome/19.0.1042.0 Safari/535.21")
@@ -86,7 +113,9 @@ public class Ltd_today_fragment extends BaseFragment {
             if (resp.statusCode() == 200) {
                 document = con.get();
                 if (document != null) {
-                    getdata();
+                    if (getdata()) {
+                        setUiApplication();
+                    }
                 }
             } else if (resp.statusCode() == 307) {
                 String sUrl = "";
@@ -97,81 +126,107 @@ public class Ltd_today_fragment extends BaseFragment {
                         timeout(10000).execute();
                 document = resp.parse();
                 if (document != null) {
-                    getdata();
+                    if (getdata()) {
+                        setUiApplication();
+                    }
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        setUiApplication();
+
     }
 
-    private void getdata() {
-        Elements element = document.select("div.fixtbl").first().select("tbody").first().select("tr");
-        classCup = document.select("div.fixtbl").first().select("tbody").first().select("tr.cups").first().toString();
-        classAlt = document.select("div.fixtbl").first().select("tbody").first().select("tr.alt").first().toString();
-        classOdds = document.select("div.fixtbl").first().select("tbody").first().select("tr.odds").first().toString();
-        for (int i = 1; i < element.size(); i++) {
-            if (element.get(i).toString().contains(classCup.substring(0, 16))) {
-                headerID++;
-                typeID = element.get(i).text();
-            } else if ((element.get(i).toString().contains(classAlt.substring(0, 15))) || (element.get(i).toString().contains("<tr xcup="))) {
-                LtdToday ltdToday = new LtdToday();
+    private boolean getdata() {
+        mArraylist.clear();
+        Element element = document.select("div.fixtbl").first().select("tbody").first();
+        Elements tr = element.select("tr");
 
-                if (Integer.valueOf(element.get(i).attr("xstate")) == 1) {
-                    ltdToday.setHeaderId(headerID);
-                    ltdToday.setTypeId(typeID);
-                    ltdToday.setDate(element.get(i).select("td.cal").first().text());
-                    ltdToday.setHomeName(element.get(i).select("td.hme").first().text());
-                    String linkHome = element.get(i).select("td.hme").first().select("a").first().attr("href");
-                    ltdToday.setLinkHome(BASE_URL + linkHome.substring(0, 9) + "/cau-thu" + linkHome.substring(9, linkHome.length()));
-                    ltdToday.setImgHome(element.get(i).select("img").first().attr("src"));
-                    ltdToday.setTime(element.get(i).select("td.sco").text());
-                    ltdToday.setLinkSoccer(BASE_URL + element.get(i).select("td.sco").select("a").first().attr("href"));
-                    Elements aways = element.get(i).select("td.awy");
-                    ltdToday.setImgAway(aways.get(0).select("img").first().attr("src"));
-                    ltdToday.setAwayName(aways.get(1).select("a").first().text());
-                    String linkAway = aways.get(1).select("a").first().attr("href");
-                    ltdToday.setLinkAway(BASE_URL + linkAway.substring(0, 9) + "/cau-thu" + linkAway.substring(9, linkAway.length()));
-                    if (element.get(i + 1).toString().contains(classOdds.substring(0, 16))) {
+        for (int i = 1; i < tr.size(); i++) {
+            if (!tr.get(i).attr("xcup").equals("")) {
 
-                        Elements oddrow = element.get(i + 1).select("table.oddrow").first().select("tr");
-                        Elements td_hdp_all = oddrow.get(0).select("td.hdp");
-                        Elements td_oue_all = oddrow.get(0).select("td.oue");
-                        Elements td_hdp_h1 = oddrow.get(1).select("td.hdp");
-                        Elements td_oue_h1 = oddrow.get(1).select("td.oue");
+                if (Integer.valueOf(tr.get(i).attr("xcup")) == 10
+                        || Integer.valueOf(tr.get(i).attr("xcup")) == 18
+                        || Integer.valueOf(tr.get(i).attr("xcup")) == 8
+                        || Integer.valueOf(tr.get(i).attr("xcup")) == 9
+                        || Integer.valueOf(tr.get(i).attr("xcup")) == 13
+                        || Integer.valueOf(tr.get(i).attr("xcup")) == 7
+                        || Integer.valueOf(tr.get(i).attr("xcup")) == 16
+                        || Integer.valueOf(tr.get(i).attr("xcup")) == 93
+                        || Integer.valueOf(tr.get(i).attr("xcup")) == 95
+                        || Integer.valueOf(tr.get(i).attr("xcup")) == 12) {
 
-                        LtdToday.Catran catran = ltdToday.new Catran();
-                        LtdToday.Hiep1 hiep1 = ltdToday.new Hiep1();
+                    if (tr.get(i).attr("class").equals("cups")) {
+                        headerID++;
+                        typeID = tr.get(i).text();
+                    } else if (!tr.get(i).attr("xstate").equals("3")) {
+                        LtdToday ltdToday = new LtdToday();
 
-                        catran.setHdp_rte(td_hdp_all.get(0).text());
-                        catran.setHdp_1(td_hdp_all.get(1).text());
-                        catran.setHdp_2(td_hdp_all.get(2).text());
-                        catran.setOue_rte(td_oue_all.get(0).text());
-                        catran.setOue_1(td_oue_all.get(1).text());
-                        catran.setOue_2(td_oue_all.get(2).text());
+                        ltdToday.setHeaderId(headerID);
+                        ltdToday.setTypeId(typeID);
+                        ltdToday.setDate(tr.get(i).select("td.cal").first().text());
+                        ltdToday.setHomeName(tr.get(i).select("td.hme").first().text());
+                        String linkHome = tr.get(i).select("td.hme").first().select("a").first().attr("href");
+                        ltdToday.setLinkHome(BASE_URL + linkHome.substring(0, 9) + "/cau-thu" + linkHome.substring(9, linkHome.length()));
+                        ltdToday.setImgHome(tr.get(i).select("img").first().attr("src"));
+                        ltdToday.setTime(tr.get(i).select("td.sco").text());
+                        ltdToday.setLinkSoccer(BASE_URL + tr.get(i).select("td.sco").select("a").first().attr("href"));
+                        Elements aways = tr.get(i).select("td.awy");
+                        ltdToday.setImgAway(aways.get(0).select("img").first().attr("src"));
+                        ltdToday.setAwayName(aways.get(1).select("a").first().text());
+                        String linkAway = aways.get(1).select("a").first().attr("href");
+                        ltdToday.setLinkAway(BASE_URL + linkAway.substring(0, 9) + "/cau-thu" + linkAway.substring(9, linkAway.length()));
+                        if (tr.get(i + 1).attr("class").equals("odds")) {
 
-                        hiep1.setHdp_rte(td_hdp_h1.get(0).text());
-                        hiep1.setHdp_1(td_hdp_h1.get(1).text());
-                        hiep1.setHdp_2(td_hdp_h1.get(2).text());
-                        hiep1.setOue_rte(td_oue_h1.get(0).text());
-                        hiep1.setOue_1(td_oue_h1.get(1).text());
-                        hiep1.setOue_2(td_oue_h1.get(2).text());
+                            Elements oddrow = tr.get(i + 1).select("table.oddrow").first().select("tr");
+                            Elements td_hdp_all = oddrow.get(0).select("td.hdp");
+                            Elements td_oue_all = oddrow.get(0).select("td.oue");
+                            Elements td_hdp_h1 = oddrow.get(1).select("td.hdp");
+                            Elements td_oue_h1 = oddrow.get(1).select("td.oue");
 
-                        ltdToday.setCatran(catran);
-                        ltdToday.setHiep1(hiep1);
+                            LtdToday.Catran catran = ltdToday.new Catran();
+                            LtdToday.Hiep1 hiep1 = ltdToday.new Hiep1();
 
+                            catran.setHdp_rte(td_hdp_all.get(0).text());
+                            catran.setHdp_1(td_hdp_all.get(1).text());
+                            catran.setHdp_2(td_hdp_all.get(2).text());
+                            catran.setOue_rte(td_oue_all.get(0).text());
+                            catran.setOue_1(td_oue_all.get(1).text());
+                            catran.setOue_2(td_oue_all.get(2).text());
+
+                            hiep1.setHdp_rte(td_hdp_h1.get(0).text());
+                            hiep1.setHdp_1(td_hdp_h1.get(1).text());
+                            hiep1.setHdp_2(td_hdp_h1.get(2).text());
+                            hiep1.setOue_rte(td_oue_h1.get(0).text());
+                            hiep1.setOue_1(td_oue_h1.get(1).text());
+                            hiep1.setOue_2(td_oue_h1.get(2).text());
+
+                            ltdToday.setCatran(catran);
+                            ltdToday.setHiep1(hiep1);
+                        }
+                        mArraylist.add(ltdToday);
                     }
-                    mArraylist.add(ltdToday);
                 }
             }
+        }
+        if (mArraylist.size() != 0) {
+            return true;
+        } else {
+            return false;
         }
     }
 
     @UiThread
     public void setUiApplication() {
+        if (mArraylist.size() == 0) {
+            mTvLtdFail.setVisibility(View.VISIBLE);
+        } else {
+            mTvLtdFail.setVisibility(View.GONE);
+        }
         mAdapter.notifyDataSetChanged();
-        mProgressDialog.setVisibility(View.GONE);
+        if (checkprocess) {
+            mProgressDialog.setVisibility(View.GONE);
+        }
     }
 
     @Override

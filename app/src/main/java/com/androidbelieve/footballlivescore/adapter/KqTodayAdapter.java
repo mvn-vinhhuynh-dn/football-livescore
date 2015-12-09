@@ -21,13 +21,13 @@ import java.util.ArrayList;
 /**
  * Created by phulx on 12/11/2015.
  */
-public class LtdTodayAdapter extends RecyclerView.Adapter<LtdTodayAdapter.ViewholderLtdToday>
-        implements StickyRecyclerHeadersAdapter<LtdTodayAdapter.VhHeaderLtdToday> {
+public class KqTodayAdapter extends RecyclerView.Adapter<KqTodayAdapter.ViewholderLtdToday>
+        implements StickyRecyclerHeadersAdapter<KqTodayAdapter.VhHeaderLtdToday> {
     private String date = "";
     private Context mContext;
     private ArrayList<LtdToday> mArraylist;
 
-    public LtdTodayAdapter(Context mContext, ArrayList<LtdToday> mArraylist) {
+    public KqTodayAdapter(Context mContext, ArrayList<LtdToday> mArraylist) {
         this.mContext = mContext;
         this.mArraylist = mArraylist;
     }
@@ -139,7 +139,7 @@ public class LtdTodayAdapter extends RecyclerView.Adapter<LtdTodayAdapter.Viewho
     public void onBindHeaderViewHolder(VhHeaderLtdToday holder, int position) {
         StaggeredGridLayoutManager.LayoutParams layoutParams = new StaggeredGridLayoutManager
                 .LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        layoutParams.setMargins(-10, -10, 0, 15);
+        layoutParams.setMargins(-12, -12, 0, 15);
         holder.itemView.setLayoutParams(layoutParams);
         holder.tvNameLeague.setText(mArraylist.get(position).getTypeId());
     }
